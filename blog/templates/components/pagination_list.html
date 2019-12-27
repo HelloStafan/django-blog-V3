@@ -1,0 +1,88 @@
+<!-- 
+	页码模板：可复用
+	模板变量 {{posts}} 为页面对象
+			{{page_range}} 为要显示的页码列表
+
+			<a标签的参数?page= (用于分页)  
+						kw=   (用于搜索)
+ -->
+
+<nav class="pager">
+
+	<ul>
+		<!-- 若有上页 -->
+		{% if posts.has_previous %}
+		<li class="previous">
+			<a href="?page={{ posts.previous_page_number }}&kw={{search_keyword}}">
+				<span class="iconfont icon-shangyiyecu"></span>
+			</a>
+		</li>
+		{% endif %}
+
+		<!-- 页码列表 -->
+		{% for page in page_range %}
+			{% if page == posts.number %}
+				<li class="active"><a class="active" href="#">{{page}}</a></li>
+			{% else %}
+				<li><a href="?page={{page}}&kw={{search_keyword}}">{{page}}</a></li>
+			{% endif %}
+		{% endfor %}
+
+		<!-- 若有下页 -->
+		{%  if posts.has_next %}
+		<li class="next">
+			<a href="?page={{ posts.next_page_number }}&kw={{search_keyword}}">
+				<span class="iconfont icon-xiayiyecu"></span>
+			</a>
+		</li>
+		{% endif %}
+  </ul>
+
+</nav>
+
+<!-- 将分页样式和分页html 写在一起，作为一个组件！！ -->
+<style type="text/css">
+	/* 分页区 */
+	.pager {
+		text-align: center;    /* 整体居中 */
+		margin-bottom: 50px;
+	}
+	.pager li {
+		display: inline-block;  /* li并排显示 */
+		line-height: 20px;      /* 内部文字居中 */
+		text-align: center;
+
+		margin: 0 2px;         /* li之间的间隔 */
+	}
+	/* 除了上/下页 : 基本圆形按钮*/
+	.pager li:not(.previous):not(.next) a {
+		display: inline-block;   /* 圆形按钮 */
+		height: 20px;
+		width: 20px;
+		border-radius: 50%;
+		padding: 10px;
+		
+		color: #848c96;
+		border: 1px solid #cdd1d4;
+	}
+	/* 除了上/下页 和 激活页 : 鼠标经过和边框色一致*/
+	.pager li:not(.previous):not(.next):not(.active) a:hover {
+		background-color: #cdd1d4;
+	}
+
+	/* 激活页 */
+	.pager li.active a.active {   /* 增加css优先级,以覆盖上面定义的a颜色 */
+		color: #fff;
+		background-color: #5e72e4;
+	}
+	/* 上/下页：图标字体 */
+	.pager li span {
+		font-size: 32px;
+		vertical-align:middle;
+	}
+	.pager li span:hover {
+		color: #bdc2c7;
+	}
+</style>
+
+

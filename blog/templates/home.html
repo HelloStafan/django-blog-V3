@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+<!-- 标题块 -->
+{% block title %}我的博客|主页{% endblock %}
+
+<!-- 激活块 -->
+{% block nav_主页_active %}active{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+<!-- 内容块 -->
+{% block content %}
+	<h2> 欢迎访问我的网站！ </h2>
+{% endblock %}
+	
+
+	<style>	
+	/* 不需要侧边栏 */
+	.sidebar {
+    	display: none;
+	}
+	/* 居中 */
+	.main {
+		padding-left: 0 ;
+	}
+	.content {
+		margin: 0 auto;
+	}
+	.content h2 {
+		text-align: center;
+		line-height: 400px;
+    }
+	</style>
+

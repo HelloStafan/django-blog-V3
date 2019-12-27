@@ -1,0 +1,147 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- 填充块1. 标题 -->
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1445497_hr557lex2d.css">
+    <link href="{% static 'css/reset.css' %}" rel="stylesheet">
+    <link href="{% static 'css/common.css' %}" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+    <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
+    <link rel="shortcut icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
+</head>
+
+<body>
+
+    <!-- 必有1. 导航区 -->
+    <nav class="nav nav-fixed-top">
+
+        <!-- logo -->
+        <div class="nav-header left">
+            <a href="#">  <!-- 可图片 可文字-->
+                个人博客网站
+            </a>
+        </div>
+        <!-- 导航list -->
+        <ul class="nav-list left">
+            <!-- 普通链接 -->
+            <li class="{% block nav_主页_active %} {% endblock %}">
+                <a href="/">
+                    <span class="iconfont icon-jia"></span>
+                    首页
+                </a>
+            </li>
+            <li class="{% block nav_博客_active %} {% endblock %}">
+                <a href="{% url 'blog:post_list' %}">
+                    <span class="iconfont icon-boke"></span>
+                    博客
+                </a>
+            </li>
+
+            <!-- 下拉链接  -->
+            <li class="dropdown {% block nav_分类_active %}{% endblock %}" >
+                <a href="{% url 'blog:tag_list' %}">
+                    <span class="iconfont icon-dangan"></span>
+                    分类
+                </a>
+                <ul class="nav-sub-list clearfix"  role="menu" > <!-- 这里的参数还可以动态换成标签内容吗？--> <!-- 注意 这里的参数传递用 字符串 -->
+                    <li><a href="{% url 'blog:post_list_by_tag' tag_slug='java' %}"> Java </a></li>
+                    <li><a href="{% url 'blog:post_list_by_tag' tag_slug='python' %}"> python </a></li>
+                    <li><a href="{% url 'blog:post_list_by_tag' tag_slug='ruby' %}"> ruby </a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- 搜索框表单--  action = 相应请求(为get请求)添加在form表单中!!-->
+        <div class="nav-search right" >
+            <form action="{% url 'search' %}">
+                <!-- 搜索框 -->
+                <input type="text" name="kw" class="form-control" placeholder="搜索" autocomplete="off">
+                <!-- 按钮 -->
+                <button type="submit" class="btn btn-default ">
+                    <span class="iconfont icon-sousuo"></span>
+                </button>
+            </form>
+        </div>
+
+    </nav>
+
+    <!-- 必有2. 横幅区 -->
+    <div class="banner">
+        <!-- 标语 -->
+        <div class="intro">
+            <h1 style="margin-bottom:12px;">Hello_stefan</h1>
+            <p style="font-size: 20px;">做属于自己的博客</p>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main clearfix">
+
+        <!-- 必有2.sidebar区 -->
+        <input type="checkbox" id="check"/>
+        <label for="check">
+            <span id="open" class="iconfont icon-bars"></span>
+            <span id="close" class=" iconfont icon-jiantou"></span>
+        </label>
+
+        <div class="sidebar">
+            <aside class="Bycategory">
+                <h4 class="title slide-btn">
+                    <span class="iconfont icon-fenlei"></span>
+                    分类目录
+                </h4>
+                <ul class="content">
+
+                    <li><a href="">Lorem.</a></li>
+                    <li><a href="">Cumque!</a></li>
+                    <li><a href="">Fugiat?</a></li>
+                    <li><a href="">Odio!</a></li>
+                    <li><a href="">Ea?</a></li>
+                    <li><a href="">Corporis?</a></li>
+                    <li><a href="">Excepturi?</a></li>
+                    <li><a href="">Sit?</a></li>
+                </ul>
+            </aside>
+
+            <aside class="Bydate">
+                <h4 class="title slide-btn">
+                    <span class="iconfont icon-rili"></span>
+                    文章归档
+                </h4>
+                <ul class="content">
+                    <li><a href="">Lorem.</a></li>
+                    <li><a href="">Modi!</a></li>
+                    <li><a href="">Earum?</a></li>
+                    <li><a href="">Perspiciatis?</a></li>
+                    <li><a href="">Eveniet.</a></li>
+                    <li><a href="">Inventore.</a></li>
+                    <li><a href="">Numquam!</a></li>
+                    <li><a href="">Consequatur.</a></li>
+                </ul>
+            </aside>
+        </div>
+
+        <!-- 填充块2：内容区 -->
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+
+    <script>
+    // 侧边栏的二级菜单
+        // 获取下拉按钮
+        var slideBtns = document.getElementsByClassName("slide-btn");
+        // 注册点击事件 → 按钮自身更改类名
+        for (var i = 0; i < slideBtns.length; i++) {
+            slideBtns[i].onclick = function () {
+                this.classList.toggle("active");
+            }
+        }
+    </script>
+</body>
+</html>

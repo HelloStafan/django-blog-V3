@@ -1,0 +1,39 @@
+<div class="-page">
+	<span class="step-links">
+
+		{% for before in Before_object %}
+			<!-- 有前一页 -->
+			{% if before %}
+				<a href="{{ before.get_absolute_url }}">上一篇</a>
+			{% endif %}
+
+		{% endfor %}
+			<!-- 现在页 -->
+			<span class="currnet">
+				  共 {{ Before_object.paginator.num_pages }} 篇
+			</span>
+
+
+		{% for after in After_object %}
+			<!-- 有下一页 -->
+			{%  if after %}
+				<a href="{{ after.get_absolute_url }}">下一篇</a>
+			{% endif %}
+		{% endfor %}
+
+	</span>
+</div>
+
+<!--  美化  标签定义
+	<span class="article-nav-prev">上一篇
+	<span class="article-nav-next">下一篇
+-->
+
+<!-- 总结
+    page对象
+	page.number 返回页数
+
+	has_previous()
+	has_next()
+	page.previous_page_number  前一页页数
+	page.next_page_number      后一页页数

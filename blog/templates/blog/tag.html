@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+<!-- 标题块 -->
+{% block title %}分类{% endblock %}
+<!-- 激活块 -->
+{% block nav_分类_active %}active{% endblock %}
+
+<!-- 内容块 分类列表-->
+{% block content %}
+
+	<!-- {% load static %} -->
+	<link href="{% static 'css/tag.css' %}" rel="stylesheet">
+
+	<div class="tag-list clearfix">
+		{% for tag in tags %}
+		<div class="tag-item">
+
+			<div class="panel-info">
+				<!-- 超链接 -->
+				<a href="{% url 'blog:post_list_by_tag' tag.slug %}"></a>
+
+				<!-- 大图 -->
+				<div class="big left">
+					<div class="title">
+						{{ tag }}
+					</div>
+				</div>
+				<!-- 小图 -->
+				<div class="small right">
+					<div class="thumbnail">
+						<!-- 最初 我为什么要采用这种方式引入图片？ -->
+						<!-- 即写死的相对路径: -->
+						<!-- <img src="/static/img/nail2.jpg"> -->
+						<img src="{% static 'img/nail2.jpg' %}">
+					</div>
+					<div class="thumbnail">
+						<!-- <img src="/static/img/nail2.jpg"> -->
+						<img src="{% static 'img/nail1.jpg' %}">
+						<span> + {{ tag.posts_count }}</span>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		{% endfor %}
+	</div>
+
+	<!-- css在这里引入：在这里引入太慢了 -->
+	
+{% endblock %}

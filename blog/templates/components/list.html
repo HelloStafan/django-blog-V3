@@ -1,0 +1,50 @@
+<!-- 
+	列表模板：可复用
+		引入了pagination_list.html模板
+ -->
+<!-- {%  load static %} -->
+<link href="{% static 'css/list.css' %}" rel="stylesheet">
+<!-- 好像只能用  加载静态文件来使用，直接引入不行? -->
+
+	<!-- 如果有帖子渲染 -->
+	{% if posts %}
+		<!-- 渲染 -->
+		{% for post in posts %}
+			<div class="panel-info">
+
+				<!-- 1.标题 -->
+				<div class="header" >
+					<h2 class="title">  <!--post实例的具体url，还应修改!!!-->
+						<a href="{{ post.get_absolute_url }}">
+							{{ post.title }}
+						</a>
+					</h2>
+				</div>
+
+				<!-- 2.脚注(添加 time 和 tag) -->
+				<div class="footer">
+					<div class="time">
+						<span class="iconfont icon-shijian2"></span>
+						{{ post.publish }}
+					</div>
+					<div class="tags">
+						<span class="iconfont icon-tag"></span>
+						<!-- 之前的没有超链接显示的写法 -->
+						<!-- {{ post.tags.all|join:"， " }}  -->
+						{% for tag in post.tags.all %}
+							<a href="{% url 'blog:post_list_by_tag' tag.slug %}"> {{tag.name}} </a>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+
+		<!-- 引入 分页模板  -->
+		{% include "./pagination_list.html" %}
+
+	<!-- 如果没有帖子渲染 -->
+	{% else %}
+		<h3> 暂无博客，敬请期待 </h3>
+	{% endif %}
+
+

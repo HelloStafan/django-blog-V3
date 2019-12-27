@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+<!-- 标题块 -->
+{% block title %}博客{% endblock %}
+<!-- 激活块：-->
+{% block nav_博客_active %}active{% endblock %}
+
+<!-- 内容块  帖子列表(总)-->
+{% block content %}
+
+	<div class="wrapper">
+
+		<h1 class="title">My Blog</h1>
+		
+		{% include "../components/list.html" with posts=posts %}
+
+	</div>
+
+	
+	<!-- 该页面特殊的样式, 为了使list这一模板独立 -->
+	<style>
+		 /* list包裹器 */
+		.wrapper { 
+    		padding: 0 40px;
+		}
+		/* 标题 */
+		.content .wrapper>.title {   
+    		margin-bottom: 30px;
+		}
+	</style>
+
+{% endblock %}
+
+
+
+
