@@ -1,0 +1,125 @@
+/* 分类页 content的样式 */
+@charset "utf-8";
+
+/* 不需要侧边栏 */
+.sidebar {
+    display: none;
+}
+
+.main .content {
+    width: 90%;
+    margin: 0 auto;
+}
+img {
+    opacity: .8;
+}
+.tag-list {
+    width: 100%;
+    font-size: 0;
+}
+.tag-list .tag-item {
+    display: inline-block;  /* 将其inline-block后,有空隙:父级设font */
+    margin-right: 30px;
+    margin-bottom: 30px;
+
+    width: 22%;
+    min-height: 180px;
+    height: 180px;
+
+}
+/* 面板区 */
+.tag-item .panel-info {
+    height: 100%;
+    position: relative;
+}
+/* 左边 大图 */
+.panel-info .big {
+    width: 68%;
+    height: 100%;
+    background: url("../img/nail_big.jpg");
+    background-size: cover;
+    background-position: center;
+    opacity: .8;
+
+    margin-right: 4px;
+    position: relative;
+}
+.panel-info .big .title {   /* 绝对定位 蒙版 */
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    color: #fff;         /* 颜色 */
+    background: rgba(0, 0, 0, 0.5);
+    text-align: center;    /* 居中 */
+    line-height: 180px;
+    font-size: 20px;       /* 字体 */
+    font-weight: 900;
+    
+}
+.panel-info .big::after {   /* 绝对定位  伪元素 */
+    content: "";        /* 定义基本，元素出现 */
+    width: 40px;
+    height: 1px;
+    background: #FF9800;
+    
+    position: absolute; /* 定位 */
+    top: 110px;
+    left: 65px;
+} 
+
+
+/* 右边 小图 */
+ .panel-info .small {
+    width: 30%;
+    height: 100%;
+}
+.panel-info .small .thumbnail {
+    height: 49%;
+    position: relative;
+}
+.panel-info .small .thumbnail:first-child {
+    margin-bottom: 4px;
+}
+    /*  内部*/
+.panel-info .small .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* ！！！！ */
+}
+.panel-info .small .thumbnail span {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    color: #fff;
+    background-color: rgba(255, 193, 7 , .8);
+    text-align: center;
+    line-height: 88px;
+    font-size: 20px;
+    font-weight: 900;
+}
+
+
+/* 定位元素居中 的进阶版！！ */
+    /* 1.0交互形式： 整体opticty */
+.panel-info a {
+    position: absolute;   
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+
+    opacity: .4;
+    background-color: #7b9ab9;
+    
+}
+/* 2.0交互形式：蒙版移动*/
+.panel-info a:hover {
+    opacity: 0;
+}

@@ -1,6 +1,7 @@
 from django.shortcuts import render  # 快捷方式：渲染
 from django.shortcuts import get_object_or_404  # 快捷方式：查询对象
 
+
 # 相关模型
 from .models import Post
 from taggit.models import Tag  # 该app中的Tag模型(已经有了？√app中内置的)
@@ -8,6 +9,7 @@ from taggit.models import Tag  # 该app中的Tag模型(已经有了？√app中�
 # 分页相关
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
+from urllib.request import quote, unquote
 
 # 1. 帖子列表
 def post_list(request, tag_slug=None):
@@ -56,13 +58,15 @@ def post_detail(request, year, month, day, title):
     # 分页对象
     paginator = Paginator(posts_list, 1)  # 实例化分页器（注意后面这个参数）
 
+    title = unquote(title, encoding='gbk');
     # 获取所请求的帖子
     post = get_object_or_404(Post, status='published',
                              publish__year=year,
                              publish__month=month,
                              publish__day=day,
-                             title = title,
+                             title=title,
                              )
+    
 
     page = posts_list.index(post)+1  # 当前页
 
@@ -71,7 +75,7 @@ def post_detail(request, year, month, day, title):
 
     return render(request,
                   "blog/detail.html",
-                  {'post':post,  # 该页显示 1.帖子详情
+                  {'post':post,  # 该页显示  1.帖子详情
                    'Before_object': before_object,  # 前一页的帖子对象
                    'After_object': after_object,  # 后一页的帖子对象
                    })

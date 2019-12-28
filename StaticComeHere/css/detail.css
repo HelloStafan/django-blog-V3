@@ -1,0 +1,35 @@
+/* 博客详情页 content的样式 */
+@charset "utf-8";
+/* 头部信息 */
+.article {
+    padding-left: 40px;
+}
+.article .header {
+    background-color: rgb(245, 245, 245);
+    border: 2px solid #ddd;
+    border-bottom: none;
+
+    padding: 10px 15px;
+    margin: 0 -15px;
+    box-shadow: 8px 11px 20px rgb(194, 180, 180)
+    /* box-shadow: 0px 0px 6px rgb(194, 180, 180); */
+}
+.article .header .title {
+    margin: 10px 0;
+}
+.article .header .info .time {
+    margin-right: 10px;
+}
+.article .header .info .tags  {
+    margin: 10px 0 ;
+}
+
+
+/* 主体内容 */
+.article .body {
+    min-height: 500px;
+    padding: 25px;
+
+    background-color: rgba(241, 235, 235, 0.8);
+    border: 2px solid #ddd;    
+}

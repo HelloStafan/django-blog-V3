@@ -1,4 +1,4 @@
-from django.urls import path  # url相关
+from django.urls import path,re_path  # url相关
 from . import views
 
 app_name = 'blog'  # 命名空间 和 url名称的用途
@@ -14,10 +14,10 @@ urlpatterns = [
     path('tag', views.tag_list, name='tag_list'),
 
     # 4.请求参数(int:年月日) => 帖子详情
-        # 注意：具有唯一标识性，好像没弄好
+        # 注意：具有唯一标识性
     path('<int:year>/<int:month>/<int:day>/<str:title>',
          views.post_detail,
          name='post_detail'
-         )
+         ),
 
 ]

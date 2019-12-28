@@ -1,0 +1,21 @@
+@charset "utf-8";
+
+/* 伪元素处理父级高度坍塌 */
+.clearfix::after {
+    display: block;
+    content: "";
+    clear: both;
+}
+
+/* 左右浮动 */
+.left {
+    float: left;
+}
+.right {
+    float: right;
+}
+
+
+
+
+
