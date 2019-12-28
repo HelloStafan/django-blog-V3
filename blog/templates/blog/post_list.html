@@ -5,6 +5,12 @@
 <!-- 激活块：-->
 {% block nav_博客_active %}active{% endblock %}
 
+
+<!-- 侧边栏  -->
+{% block sidebar %}
+	{% include "../components/sidebar.html" with all_tags=all_tags dateList=dateList %}
+{% endblock %}
+
 <!-- 内容块  帖子列表(总)-->
 {% block content %}
 
@@ -15,7 +21,6 @@
 		{% include "../components/list.html" with posts=posts %}
 
 	</div>
-
 	
 	<!-- 该页面特殊的样式, 为了使list这一模板独立 -->
 	<style>
@@ -24,12 +29,13 @@
     		padding: 0 40px;
 		}
 		/* 标题 */
-		.content .wrapper>.title {   
+		.content .wrapper > .title {   
     		margin-bottom: 30px;
 		}
 	</style>
-
 {% endblock %}
+
+
 
 
 

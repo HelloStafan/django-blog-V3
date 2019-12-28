@@ -9,7 +9,9 @@ from taggit.models import Tag  # 该app中的Tag模型(已经有了？√app中�
 # 分页相关
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
-from urllib.request import quote, unquote
+
+all_tags = Tag.objects.all()
+all_posts = Post.published.all() 
 
 # 1. 帖子列表
 def post_list(request, tag_slug=None):
@@ -23,10 +25,12 @@ def post_list(request, tag_slug=None):
         tag = get_object_or_404(Tag, slug=tag_slug)
                         # 注意tag_in!!s ———— Post管理器；
                         # tags__in = [tag] !!？？
-        object_list = object_list.filter(tags__in=[tag])  
-        
+        posts = all_posts.filter(tags__in=[tag])  
+    else:
+        posts = all_posts
+
     # 2.添加分页机制
-    paginator = Paginator(object_list, 6)  # 实例化分页器
+    paginator = Paginator(posts, 6)  # 实例化分页器
     page = request.GET.get('page')  # 从get请求中获取页数参数
     posts = paginator.get_page(page)  # 分页器获取  请求页内容
 
@@ -42,23 +46,24 @@ def post_list(request, tag_slug=None):
         template_file = "post_list_by_tag.html"
     else:
         template_file = "post_list.html"
-
+    
     return render(request,
                   'blog/' + template_file,
                   {'posts': posts,  # posts为页面对象(一页)
                    'page_range':page_range,  # 分页渲染的页数
                    'tag': tag,
+                   'all_tags':all_tags,
                    }) 
 
 # 2. 帖子详情
 def post_detail(request, year, month, day, title):
 
     # 将QuerySet 列表化
-    posts_list = list(Post.published.all())
+    posts_list = list(all_posts)
     # 分页对象
     paginator = Paginator(posts_list, 1)  # 实例化分页器（注意后面这个参数）
 
-    title = unquote(title, encoding='gbk');
+
     # 获取所请求的帖子
     post = get_object_or_404(Post, status='published',
                              publish__year=year,
@@ -83,16 +88,14 @@ def post_detail(request, year, month, day, title):
 
 # 3.所有帖子的分类
 def tag_list(request,):
-    # 获取所有的tag实例
-    tags = Tag.objects.all()  
 
     # ★获取标签对应帖子的数量(猴子补丁)
-    for tag in tags:                       # 注意  管理器的运用！
+    for tag in all_tags:                       # 注意  管理器的运用！
         tag.posts_count = Post.published.filter(tags=tag).count()  # Post 模型中已有tag属性？！
     
     # 按标签 对应帖子数量 排序
     # tags = sorted(list(tags), key=lambda x : x.posts_count)
-    tags_list = list(tags)
+    tags_list = list(all_tags)
     tags = sorted(tags_list, key=lambda x : x.posts_count,reverse=True)
 
     return render(request,

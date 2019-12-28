@@ -1,0 +1,47 @@
+<!-- 
+    侧边栏模板：可复用
+    所有的  分类  和  日期：月份
+ -->
+<!-- {%  load static %} -->
+<link href="{% static 'css/sidebar.css' %}" rel="stylesheet">
+<!-- 好像只能用  加载静态文件的方式来引入，直接引入不行? -->
+
+
+    <!-- check区 -->
+    <input type="checkbox" id="check"/>
+    <label for="check">
+        <span id="open" class="iconfont icon-bars"></span>
+        <span id="close" class=" iconfont icon-jiantou"></span>
+    </label>
+
+    <!-- sidebar区 -->
+    <div class="sidebar-wrapper">
+        {% if all_tags%}
+            <aside class="Bycategory">
+                <h4 class="title slide-btn">
+                    <span class="iconfont icon-fenlei"></span>
+                    分类目录
+                </h4>
+                <ul class="content">
+                    {% for tag in all_tags %}
+                        <li><a href="">{{ tag }}</a></li>
+                    {% endfor %}
+                </ul>
+            </aside>
+        {% endif %}
+
+        {% if dateList%}
+            <aside class="Bydate">
+                <h4 class="title slide-btn">
+                    <span class="iconfont icon-rili"></span>
+                    文章归档
+                </h4>
+                <ul class="content">
+                    {% for date in dateList %}
+                        <li><a href="">{{ date }}</a></li>
+                    {% endfor %}
+                </ul>
+            </aside>
+        {% endif %}
+    </div>
+

@@ -1,0 +1,130 @@
+/* 3.1 check区 */
+#check {
+    display: none;
+}
+/* 未被选中 */
+label #open, label #close {
+    font-size: 30px;
+    cursor: pointer;
+    color: lightslategray;
+    position: absolute;
+}
+label #open {
+    left: 10px;
+    transition: all .6s;
+}
+label #open:hover {
+    padding-left: 5px;
+}
+label #close {
+    left: -6%;
+    opacity: 0;
+    transition: all .6s;
+    z-index: 999; 
+    font-weight: bold;
+}
+/* 被选中 */
+    /* open按钮 移出 并 消失 */
+#check:checked ~ label #open {
+    left: 20%;
+    opacity: 0; 
+}
+    /* close按钮 移入：最好与sidebar同步*/
+#check:checked ~ label #close {
+    left: 13%;
+    opacity: 1; 
+}
+    /* sidebar  移入：最好与clsoe同步*/
+#check:checked ~ .sidebar-wrapper {
+    left: 0;
+    opacity: 1; 
+}
+    /* content 避让 !!!!!!*/     
+.sidebar:has(#check:checked) + .content {
+    margin-left: 16%;
+}
+
+/* 3.2 sidebar区 */
+/* 整体 */
+.sidebar-wrapper {
+    width: 15%;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+
+    position: absolute;
+    left: -21%;
+    opacity: 0; 
+    transition: all .6s ease;
+}
+.Bydate, .Bycategory {
+    background-color: #fff;
+    padding: 15px 20px; 
+    box-shadow: 0px 0px 20px 7px #ccc;
+}
+/* 内部 */
+    /* 标题-整体 */
+    /* 作为标题的样式。故而选择器为title */
+.Bydate .title, 
+.Bycategory .title {
+    color: #a19f9f;
+    border-bottom: 1px solid #e7e7e7;   
+    padding-bottom: 12px;
+    margin-bottom: 10px;
+    
+    position: relative;
+}    
+    /* 标题-图标 */
+.sidebar-wrapper span.iconfont {
+    font-size: 20px;
+    color: lightsalmon;
+}
+
+    /* 标题-下划线 */
+.title.active::after {
+    content: "";      /* 设置伪元素时, 注意 内容 */
+    display: block;   /* 注意   显示方式  */
+
+    height: 2.5px;
+    width: 75px;
+    background-color: #51aded;
+
+    position: absolute;   /* 相对于标题，定位 */
+    left: 0;
+    bottom: 0;   
+}
+    /* 内容区-整体 */
+.Bydate .content, 
+.Bycategory .content {
+    overflow: hidden;  /* 之前已经溢出了!! 没有设置 */
+    font-size: 18px;
+    line-height: 1.5em;
+
+    max-height: 0;   /* 最大高度可能比直接设置高度好 */
+    transition: max-height .6s;
+}
+    /* 内容区-内部 */
+.Bydate .content li a, 
+.Bycategory .content li a {
+    display: inline-block;   /* a填充li */
+    height: 100%;
+    width: 100%;
+    color: #4c4c4c;  
+    
+    transition: padding .5s;
+    box-sizing: border-box;
+}
+    /* 内部 动态效果 */
+.Bydate .content li a:hover, 
+.Bycategory .content li a:hover {
+    padding-left: 8px;
+    border-radius: 20px;
+    background-color: rgba(0,0,0,.08);
+}
+    /* 整体 动态效果 */
+    /* 作为按钮的动态效果样式。故而选择器为slide-btn */
+.slide-btn {
+    cursor: pointer;
+}
+.slide-btn.active ~ .content {
+    max-height: 300px;
+}
