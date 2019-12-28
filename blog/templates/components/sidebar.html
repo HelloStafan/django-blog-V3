@@ -16,32 +16,29 @@
 
     <!-- sidebar区 -->
     <div class="sidebar-wrapper">
-        {% if all_tags%}
-            <aside class="Bycategory">
-                <h4 class="title slide-btn">
-                    <span class="iconfont icon-fenlei"></span>
-                    分类目录
-                </h4>
-                <ul class="content">
-                    {% for tag in all_tags %}
-                        <li><a href="">{{ tag }}</a></li>
-                    {% endfor %}
-                </ul>
-            </aside>
-        {% endif %}
+        
+        <aside class="Bytag">
+            <h4 class="title slide-btn">
+                <span class="iconfont icon-fenlei"></span>
+                分类目录
+            </h4>
+            <ul class="content">
+                {% for tag in all_tags %}
+                    <li><a href="">{{ tag }} ({{ tag.posts_count }})</a></li>
+                {% endfor %}
+            </ul>
+        </aside>
 
-        {% if dateList%}
-            <aside class="Bydate">
-                <h4 class="title slide-btn">
-                    <span class="iconfont icon-rili"></span>
-                    文章归档
-                </h4>
-                <ul class="content">
-                    {% for date in dateList %}
-                        <li><a href="">{{ date }}</a></li>
-                    {% endfor %}
-                </ul>
-            </aside>
-        {% endif %}
+        <aside class="Bydate">
+            <h4 class="title slide-btn">
+                <span class="iconfont icon-rili"></span>
+                文章归档
+            </h4>
+            <ul class="content">
+                {% for date in all_date.items %}
+                    <li><a href="">{{ date.0 }} ({{ date.1 }})</a></li>
+                {% endfor %}
+            </ul>
+        </aside>
     </div>
 

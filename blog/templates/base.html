@@ -4,16 +4,19 @@
 <head>
     <!-- 填充块1. 标题 -->
     <title>{% block title %}{% endblock %}</title>
-
+    <!-- 字体图标 -->
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1445497_hr557lex2d.css">
+    <!-- 页面样式 -->
     <link href="{% static 'css/reset.css' %}" rel="stylesheet">
     <link href="{% static 'css/common.css' %}" rel="stylesheet">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <!-- 代码高亮样式 -->
     <link rel="stylesheet" href="{% static 'css/highlights/vs.css' %}">
-
+    
     <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
     <link rel="shortcut icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
+
+    <script src="../static/js/jquery.min.js"></script>
 </head>
 
 <body>
@@ -109,6 +112,12 @@
                 this.classList.toggle("active");
             }
         }
+    </script>
+    
+    <script>
+        $(function(){
+            
+        })
     </script>
 </body>
 </html>

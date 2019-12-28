@@ -10,13 +10,12 @@ from taggit.models import Tag  # 该app中的Tag模型(已经有了？√app中�
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
 
-all_tags = Tag.objects.all()
-all_posts = Post.published.all() 
+all_tags = Tag.objects.all()  # 所有标签
+all_posts = Post.published.all()  # 所有帖子
+
 
 # 1. 帖子列表
 def post_list(request, tag_slug=None):
-    # 获取所有的帖子实例
-    object_list = Post.published.all()
     
     # 1.添加标签机制(如果有参数tag)
     tag = None
@@ -43,16 +42,21 @@ def post_list(request, tag_slug=None):
     # 4.构建对象，保存其他需要显示的零散信息(如 页面的标题)
     # 以里两个文件来显示
     if tag:
-        template_file = "post_list_by_tag.html"
+        template_name = "post_list_by_tag.html"
     else:
-        template_file = "post_list.html"
+        template_name = "post_list.html"
     
+    # 侧边栏的 所有标签和日期
+    tags = get_count_by_tag(all_tags)
+    all_date = get_count_by_date(all_posts)
+
     return render(request,
-                  'blog/' + template_file,
+                  'blog/' + template_name,
                   {'posts': posts,  # posts为页面对象(一页)
                    'page_range':page_range,  # 分页渲染的页数
                    'tag': tag,
                    'all_tags':all_tags,
+                   "all_date":all_date,
                    }) 
 
 # 2. 帖子详情
@@ -60,8 +64,8 @@ def post_detail(request, year, month, day, title):
 
     # 将QuerySet 列表化
     posts_list = list(all_posts)
-    # 分页对象
-    paginator = Paginator(posts_list, 1)  # 实例化分页器（注意后面这个参数）
+    # 分页对象(以1分页)
+    paginator = Paginator(posts_list, 1) 
 
 
     # 获取所请求的帖子
@@ -86,23 +90,49 @@ def post_detail(request, year, month, day, title):
                    })
 
 
-# 3.所有帖子的分类
+# 3.分类列表
 def tag_list(request,):
 
-    # ★获取标签对应帖子的数量(猴子补丁)
-    for tag in all_tags:                       # 注意  管理器的运用！
-        tag.posts_count = Post.published.filter(tags=tag).count()  # Post 模型中已有tag属性？！
-    
-    # 按标签 对应帖子数量 排序
-    # tags = sorted(list(tags), key=lambda x : x.posts_count)
-    tags_list = list(all_tags)
-    tags = sorted(tags_list, key=lambda x : x.posts_count,reverse=True)
-
+    tags = get_count_by_tag(all_tags)
     return render(request,
                   "blog/tag.html",
                   {'tags':tags,
-                  
                    })
+
+
+
+def get_count_by_tag(tags):
+    '''
+    获取各个标签对应的数量，返回Tag对象组成的列表，列表以数量逆序
+    '''
+    # ★获取标签对应帖子的数量(猴子补丁)
+    for tag in tags:    # 注意  管理器的运用！
+        tag.posts_count = Post.published.filter(tags=tag).count()
+
+    # 按标签 对应帖子数量 排序
+    tag_list = list(all_tags)   
+    tags = sorted(tag_list, key=lambda x: x.posts_count, reverse=True)
+    return tags
+
+
+def get_count_by_date(posts):
+    '''
+    获取各个日期对应的数量，返回字典:键类型为str型，值为int型
+    '''
+    all_date = {}
+    for post in posts:
+        # 获取 该帖子的时间
+        y =  post.publish.year
+        m = post.publish.month
+        # 创建 时间字符串 
+        date = "%s年%s月"%(y,m)
+        # 获取 该时间的帖子数量    publish.year不可以吗？？
+        count = Post.published.filter(publish__year=y,
+                                      publish__month=m).count()
+        all_date[date] = count;
+    return all_date
+
+
 
 ''' 
 以前被css样式所迫 --

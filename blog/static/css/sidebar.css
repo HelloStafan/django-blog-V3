@@ -31,7 +31,7 @@ label #close {
 }
     /* close按钮 移入：最好与sidebar同步*/
 #check:checked ~ label #close {
-    left: 13%;
+    left: 12%;
     opacity: 1; 
 }
     /* sidebar  移入：最好与clsoe同步*/
@@ -39,15 +39,15 @@ label #close {
     left: 0;
     opacity: 1; 
 }
-    /* content 避让 !!!!!!*/     
-.sidebar:has(#check:checked) + .content {
+    /* content 避让！！ 选择器过于复杂，用js*/     
+/* .sidebar:has(#check:checked) + .content {
     margin-left: 16%;
-}
+} */
 
 /* 3.2 sidebar区 */
 /* 整体 */
 .sidebar-wrapper {
-    width: 15%;
+    width: 14%;
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
 
@@ -56,16 +56,16 @@ label #close {
     opacity: 0; 
     transition: all .6s ease;
 }
-.Bydate, .Bycategory {
+.Bydate, .Bytag {
     background-color: #fff;
-    padding: 15px 20px; 
+    padding: 15px 15px; 
     box-shadow: 0px 0px 20px 7px #ccc;
 }
 /* 内部 */
     /* 标题-整体 */
     /* 作为标题的样式。故而选择器为title */
 .Bydate .title, 
-.Bycategory .title {
+.Bytag .title {
     color: #a19f9f;
     border-bottom: 1px solid #e7e7e7;   
     padding-bottom: 12px;
@@ -94,17 +94,19 @@ label #close {
 }
     /* 内容区-整体 */
 .Bydate .content, 
-.Bycategory .content {
+.Bytag .content {
     overflow: hidden;  /* 之前已经溢出了!! 没有设置 */
     font-size: 18px;
     line-height: 1.5em;
 
-    max-height: 0;   /* 最大高度可能比直接设置高度好 */
-    transition: max-height .6s;
+
+    min-height: 0;   /* 最值高度可能比直接设置高度好 */
+    max-height: 0;   /* 最大高度使激活前不可见 */
+    transition: min-height .4s;
 }
     /* 内容区-内部 */
 .Bydate .content li a, 
-.Bycategory .content li a {
+.Bytag .content li a {
     display: inline-block;   /* a填充li */
     height: 100%;
     width: 100%;
@@ -115,7 +117,7 @@ label #close {
 }
     /* 内部 动态效果 */
 .Bydate .content li a:hover, 
-.Bycategory .content li a:hover {
+.Bytag .content li a:hover {
     padding-left: 8px;
     border-radius: 20px;
     background-color: rgba(0,0,0,.08);
@@ -126,5 +128,5 @@ label #close {
     cursor: pointer;
 }
 .slide-btn.active ~ .content {
-    max-height: 300px;
+    min-height: 100px;  /* 设置最小高度使content不会因为内容过少为变小 */
 }

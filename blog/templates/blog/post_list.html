@@ -8,7 +8,7 @@
 
 <!-- 侧边栏  -->
 {% block sidebar %}
-	{% include "../components/sidebar.html" with all_tags=all_tags dateList=dateList %}
+	{% include "../components/sidebar.html" with all_tags=all_tags all_date=all_date %}
 {% endblock %}
 
 <!-- 内容块  帖子列表(总)-->
@@ -21,7 +21,7 @@
 		{% include "../components/list.html" with posts=posts %}
 
 	</div>
-	
+
 	<!-- 该页面特殊的样式, 为了使list这一模板独立 -->
 	<style>
 		 /* list包裹器 */
