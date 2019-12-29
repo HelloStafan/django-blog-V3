@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 <!-- 标题块 -->
-{% block title %}{{ post.title }}{% endblock %}
+{% block title %}{{ post.title }}|HelloStafen{% endblock %}
 <!-- 激活块 -->
 {% block nav_博客_active %}active{% endblock %}
 
@@ -30,8 +30,8 @@
 
 		<!-- 主体内容 -->
 		<div class="body">
-			<!-- 3.linebreaks ？？ -->
-			{{ post.body|striptags|linebreaks}}
+			<!-- 3.linebreaks ？？striptags -->
+			{{ post.body|safe}}
 		</div>
 		<div class="footer">
 			{% include "../components/pagination_detail.html" with Before_object=Before_object   After_object=After_object %}

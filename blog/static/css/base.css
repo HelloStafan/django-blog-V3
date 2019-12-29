@@ -22,7 +22,7 @@ body {
 .nav {
     height: 50px;
     /* background-color: #337ab7;  */
-    background-color: rgba(50,120,180,.85);
+    background-color: rgba(82, 132, 175, 0.8);
     margin-bottom: 40px;
 }
 
@@ -172,8 +172,11 @@ body {
 /* content区 */
 /* 整体 */
 .main > .content {  
-    width: 80%;
-    margin: 0 80px;
+    width: 70%;
+    padding: 0 40px;
+    margin-right: 50px;
     transition: margin .5s;
 }
-
+.main > .content .pageTitle { 
+    margin-bottom: 20px;
+}

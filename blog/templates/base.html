@@ -16,7 +16,7 @@
     <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
     <link rel="shortcut icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
 
-    <script src="../static/js/jquery.min.js"></script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
 </head>
 
 <body>
@@ -101,9 +101,13 @@
 
     </div>
 
+    
+
+    <div class="footer">
+    </div>
 
     <script>
-    // 侧边栏的二级菜单
+    // 侧边栏的二级菜单;
         // 获取下拉按钮
         var slideBtns = document.getElementsByClassName("slide-btn");
         // 注册点击事件 → 按钮自身更改类名
@@ -115,8 +119,17 @@
     </script>
     
     <script>
-        $(function(){
-            
+    // 侧边栏点击使 右侧内容偏移;
+        $(function() {
+
+            var content = $(".sidebar").has("#check").siblings(".content");
+
+            $("#open").click(function() {
+                content.css("margin-left","10%")
+            })
+            $("#close").click(function() {
+                content.css("margin-left","0px")
+            })
         })
     </script>
 </body>

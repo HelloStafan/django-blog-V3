@@ -1,6 +1,6 @@
 <!-- 
     侧边栏模板：可复用
-    所有的  分类  和  日期：月份
+    所有的  分类  和  日期
  -->
 <!-- {%  load static %} -->
 <link href="{% static 'css/sidebar.css' %}" rel="stylesheet">
@@ -23,8 +23,12 @@
                 分类目录
             </h4>
             <ul class="content">
-                {% for tag in all_tags %}
-                    <li><a href="">{{ tag }} ({{ tag.posts_count }})</a></li>
+                {% for tag in tags %}
+                    <li>
+                        <a href="{% url 'blog:post_list_by_tag' tag.slug %}">
+                            {{ tag }} ({{ tag.posts_count }})
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         </aside>
@@ -35,8 +39,15 @@
                 文章归档
             </h4>
             <ul class="content">
-                {% for date in all_date.items %}
-                    <li><a href="">{{ date.0 }} ({{ date.1 }})</a></li>
+                <!-- 遍历字典的每项，并将每项的键和值解包 -->
+                {% for date_obj, posts_count in all_date.items %}
+                    <li>
+                        <!-- url 反转 -->
+                        <a href="{% url 'blog:post_list_by_date' date_obj.year date_obj.month %}">
+                            {{ date_obj.year }}年{{ date_obj.month }}月
+                            ({{ posts_count }})
+                        </a>
+                    </li>
                 {% endfor %}
             </ul>
         </aside>

@@ -1,7 +1,8 @@
 <!-- 
-	列表模板：可复用
-		引入了pagination_list.html模板
+	列表模板: 适用于多个对象
+	参数    {{ posts }} 为页面对象
  -->
+
 <!-- {%  load static %} -->
 <link href="{% static 'css/list.css' %}" rel="stylesheet">
 <!-- 好像只能用  加载静态文件来使用，直接引入不行? -->
@@ -19,6 +20,9 @@
 							{{ post.title }}
 						</a>
 					</h2>
+					<div class="sub-title">
+						{{ post.subTitle }}
+					</div>
 				</div>
 
 				<!-- 2.脚注(添加 time 和 tag) -->
@@ -38,9 +42,6 @@
 				</div>
 			</div>
 		{% endfor %}
-
-		<!-- 引入 分页模板  -->
-		{% include "./pagination_list.html" %}
 
 	<!-- 如果没有帖子渲染 -->
 	{% else %}

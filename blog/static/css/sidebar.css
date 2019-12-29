@@ -1,4 +1,9 @@
-/* 3.1 check区 */
+/*
+    侧边栏 ： 
+    宽度由父级设定百分比,子级继承;
+    高度由子级撑开，利用a元素的行高和字体以及ul的min-height  
+ */
+/* 1. check区 */
 #check {
     display: none;
 }
@@ -26,17 +31,17 @@ label #close {
 /* 被选中 */
     /* open按钮 移出 并 消失 */
 #check:checked ~ label #open {
-    left: 20%;
+    left: 12%;
     opacity: 0; 
 }
     /* close按钮 移入：最好与sidebar同步*/
 #check:checked ~ label #close {
-    left: 12%;
+    left: 11%;
     opacity: 1; 
 }
     /* sidebar  移入：最好与clsoe同步*/
 #check:checked ~ .sidebar-wrapper {
-    left: 0;
+    left: -10px;
     opacity: 1; 
 }
     /* content 避让！！ 选择器过于复杂，用js*/     
@@ -44,7 +49,7 @@ label #close {
     margin-left: 16%;
 } */
 
-/* 3.2 sidebar区 */
+/* 2. sidebar-wrapper区 */
 /* 整体 */
 .sidebar-wrapper {
     width: 14%;
@@ -58,7 +63,7 @@ label #close {
 }
 .Bydate, .Bytag {
     background-color: #fff;
-    padding: 15px 15px; 
+    padding: 15px 10px 0 26px;  /* 这个配比比较合理  */
     box-shadow: 0px 0px 20px 7px #ccc;
 }
 /* 内部 */
@@ -78,14 +83,13 @@ label #close {
     font-size: 20px;
     color: lightsalmon;
 }
-
     /* 标题-下划线 */
 .title.active::after {
     content: "";      /* 设置伪元素时, 注意 内容 */
     display: block;   /* 注意   显示方式  */
 
     height: 2.5px;
-    width: 75px;
+    width: 40%;
     background-color: #51aded;
 
     position: absolute;   /* 相对于标题，定位 */
@@ -97,7 +101,7 @@ label #close {
 .Bytag .content {
     overflow: hidden;  /* 之前已经溢出了!! 没有设置 */
     font-size: 18px;
-    line-height: 1.5em;
+    line-height: 1.5;
 
 
     min-height: 0;   /* 最值高度可能比直接设置高度好 */
@@ -107,8 +111,8 @@ label #close {
     /* 内容区-内部 */
 .Bydate .content li a, 
 .Bytag .content li a {
-    display: inline-block;   /* a填充li */
-    height: 100%;
+    display: inline-block;   /* a填充li,设置可点击范围 */
+    /* height: 100%; */     /* 高度子级撑开,所以不用设置 */
     width: 100%;
     color: #4c4c4c;  
     
