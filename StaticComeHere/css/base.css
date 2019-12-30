@@ -1,8 +1,11 @@
 ﻿/* base.html 的样式：被其他html文件继承 */
 @charset "utf-8";
+
 body {
+    min-height: 1200px;
+
     background-color: rgb(231, 226, 226);
-    font-family:helvetica, sans-serif; 
+    font-family: "微软雅黑",freight-sans-pro, helvetica, sans-serif; 
 }
 /* a标签样式 ———— 各区域不同 */
     /* 导航栏 */
@@ -21,9 +24,7 @@ body {
 /* 1. 导航区 */
 .nav {
     height: 50px;
-    /* background-color: #337ab7;  */
-    background-color: rgba(82, 132, 175, 0.8);
-    margin-bottom: 40px;
+    background-color: rgba(82, 132, 175, 0.7);
 }
 
 .nav-fixed-top {
@@ -133,10 +134,10 @@ body {
 
 /* 2. 横幅区 */
 .banner {
+    height: 100vh;
     opacity: .7;
-    height: 400px;
     background: url(../img/banner2.jpeg) no-repeat fixed; 
-    background-size: 100% 400px;
+    background-size: 100% 100%;
 
     position: relative;
 }
@@ -167,7 +168,7 @@ body {
 /* 3. main区 */
 .main {  
     padding-left: 40px;
-    padding-top: 40px;
+    padding-top: 80px;
 }
 /* content区 */
 /* 整体 */
@@ -180,3 +181,13 @@ body {
 .main > .content .pageTitle { 
     margin-bottom: 20px;
 }
+
+
+
+/* 4. footer */
+/* 加body选择器，防止改变别的元素的样式 */
+body > .footer {
+    height: 60px;
+    background-color: #848484;
+}
+

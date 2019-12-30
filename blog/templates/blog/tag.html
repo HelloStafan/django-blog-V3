@@ -20,13 +20,15 @@
 				<a href="{% url 'blog:post_list_by_tag' tag.slug %}"></a>
 
 				<!-- 大图 -->
-				<div class="big left">
-					<div class="title">
+				<div class="big">   <!-- 蒙版背景 --> 
+					<div class="title"> <!-- 标题 -->
 						{{ tag }}
+					</div>
+					<div class="line">  <!-- 标题下滑线 -->
 					</div>
 				</div>
 				<!-- 小图 -->
-				<div class="small right">
+				<div class="small">
 					<div class="thumbnail">
 						<!-- 最初 我为什么要采用这种方式引入图片？ -->
 						<!-- 即写死的相对路径: -->
@@ -44,7 +46,5 @@
 		</div>
 		{% endfor %}
 	</div>
-
-	<!-- css在这里引入：在这里引入太慢了 -->
 	
 {% endblock %}

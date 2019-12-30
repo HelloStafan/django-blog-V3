@@ -24,7 +24,7 @@ body {
 /* 1. 导航区 */
 .nav {
     height: 50px;
-    background-color: rgba(82, 132, 175, 0.8);
+    background-color: rgba(82, 132, 175, 0.7);
 }
 
 .nav-fixed-top {

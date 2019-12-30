@@ -1,11 +1,6 @@
 /* 分类页 content的样式 */
 @charset "utf-8";
 
-/* 不需要侧边栏 */
-.sidebar {
-    display: none;
-}
-
 .main .content {
     width: 90%;
     margin: 0 auto;
@@ -14,16 +9,19 @@ img {
     opacity: .8;
 }
 .tag-list {
-    width: 100%;
-    font-size: 0;
+    display: flex;
+    /* justify-content: space-between; */
+
 }
 .tag-list .tag-item {
-    display: inline-block;  /* 将其inline-block后,有空隙:父级设font */
+    flex: 1;
+    flex-basis: 25%;
+
     margin-right: 30px;
     margin-bottom: 30px;
 
-    width: 22%;
-    min-height: 180px;
+    /* min-height: 180px; */
+    max-width: 330px;
     height: 180px;
 
 }
@@ -31,11 +29,13 @@ img {
 .tag-item .panel-info {
     height: 100%;
     position: relative;
+
+    display: flex;
 }
-/* 左边 大图 */
+/* 大图 */
 .panel-info .big {
-    width: 68%;
-    height: 100%;
+    flex: 2.3;
+
     background: url("../img/nail_big.jpg");
     background-size: cover;
     background-position: center;
@@ -43,51 +43,53 @@ img {
 
     margin-right: 4px;
     position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;  /* 居中 */
+    align-items: center;
 }
-.panel-info .big .title {   /* 绝对定位 蒙版 */
+.panel-info .big::after {
+    content: "";
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-
-    color: #fff;         /* 颜色 */
     background: rgba(0, 0, 0, 0.5);
-    text-align: center;    /* 居中 */
-    line-height: 180px;
-    font-size: 20px;       /* 字体 */
-    font-weight: 900;
-    
+    z-index: -1;
 }
-.panel-info .big::after {   /* 绝对定位  伪元素 */
-    content: "";        /* 定义基本，元素出现 */
-    width: 40px;
-    height: 1px;
+
+.panel-info .big .title {   /* 标题 */
+    color: #fff;         /* 颜色 */
+    font-size: 28px;       /* 字体 */
+
+    margin-bottom: 8px;
+}
+.panel-info .big .line {   
+    width: 2.2em;
+    height: 0.1em;
     background: #FF9800;
-    
-    position: absolute; /* 定位 */
-    top: 110px;
-    left: 65px;
 } 
 
 
-/* 右边 小图 */
+/* 小图 */
  .panel-info .small {
-    width: 30%;
-    height: 100%;
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 .panel-info .small .thumbnail {
     height: 49%;
     position: relative;
 }
-.panel-info .small .thumbnail:first-child {
-    margin-bottom: 4px;
-}
     /*  内部*/
 .panel-info .small .thumbnail img {
     width: 100%;
     height: 100%;
-    object-fit: cover;  /* ！！！！ */
+    object-fit: cover;  
 }
 .panel-info .small .thumbnail span {
     width: 100%;
