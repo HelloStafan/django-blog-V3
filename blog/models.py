@@ -21,10 +21,10 @@ class Post(models.Model):
     # 模型的参数
     title = models.CharField(max_length=250,
                              unique_for_date='publish') # 对于既定日期,slug有唯一性
-    body = RichTextField()
-
-    # slug = models.SlugField(max_length=250,
-    #                         unique_for_date='publish')  
+    subTitle = models.CharField(max_length=250)
+    
+    body = models.TextField()
+ 
     # ☆创建User为Post的外键,一个User对应多个Post
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
