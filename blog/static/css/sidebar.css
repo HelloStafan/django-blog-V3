@@ -10,23 +10,23 @@
 /* 未被选中 */
 label #open, label #close {
     font-size: 30px;
-    cursor: pointer;
     color: lightslategray;
+    cursor: pointer;
+
     position: absolute;
+    z-index: 999; 
 }
 label #open {
-    left: 10px;
+    left: 0;
     transition: all .6s;
 }
 label #open:hover {
-    padding-left: 5px;
+    padding-left: 0.5%;
 }
 label #close {
-    left: -6%;
+    left: -3%;
     opacity: 0;
-    transition: all .6s;
-    z-index: 999; 
-    font-weight: bold;
+    transition: all .5s;
 }
 /* 被选中 */
     /* open按钮 移出 并 消失 */
@@ -36,13 +36,12 @@ label #close {
 }
     /* close按钮 移入：最好与sidebar同步*/
 #check:checked ~ label #close {
-    left: 11%;
+    left: 13%;
     opacity: 1; 
 }
     /* sidebar  移入：最好与clsoe同步*/
 #check:checked ~ .sidebar-wrapper {
     left: -10px;
-    opacity: 1; 
 }
     /* content 避让！！ 选择器过于复杂，用js*/     
 /* .sidebar:has(#check:checked) + .content {
@@ -57,13 +56,22 @@ label #close {
     border-top-right-radius: 15px;
 
     position: absolute;
-    left: -21%;
-    opacity: 0; 
+    left: -14%;
     transition: all .6s ease;
+}
+.sidebar-wrapper::after {
+    content: "";
+    width: 30px;
+    height: 41px;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background: #fff;
+
 }
 .Bydate, .Bytag {
     background-color: #fff;
-    padding: 15px 10px 0 26px;  /* 这个配比比较合理  */
+    padding: 7px 10px 0 26px;  /* 这个配比比较合理  */
     box-shadow: 0px 0px 20px 7px #ccc;
 }
 /* 内部 */
@@ -73,13 +81,13 @@ label #close {
 .Bytag .title {
     color: #a19f9f;
     border-bottom: 1px solid #e7e7e7;   
-    padding-bottom: 12px;
+    padding-bottom: 8px;
     margin-bottom: 10px;
     
     position: relative;
 }    
     /* 标题-图标 */
-.sidebar-wrapper span.iconfont {
+.sidebar-wrapper i.iconfont {
     font-size: 20px;
     color: lightsalmon;
 }

@@ -1,32 +1,34 @@
 <!-- {% load static %} -->
 <!DOCTYPE html>
 <html>
+
 <head>
     <!-- 填充块1. 标题 -->
     <title>{% block title %}{% endblock %}</title>
     <!-- 字体图标 -->
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1445497_hr557lex2d.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1445497_ccweilzig1d.css">
     <!-- 页面样式 -->
     <link href="{% static 'css/reset.css' %}" rel="stylesheet">
     <link href="{% static 'css/common.css' %}" rel="stylesheet">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <!-- 代码高亮样式 -->
     <link rel="stylesheet" href="{% static 'css/highlights/vs.css' %}">
-    
+
     <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
     <link rel="shortcut icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
 
-    <script src="{% static 'js/jquery.min.js' %}"></script>
+
 </head>
 
 <body>
 
-    <!-- 必有1. 导航区 -->
+    <!-- 1. 导航区 必有 -->
     <nav class="nav nav-fixed-top">
 
         <!-- logo -->
         <div class="nav-header left">
-            <a href="#">  <!-- 可图片 可文字-->
+            <a href="#">
+                <!-- 可图片 可文字-->
                 个人博客网站
             </a>
         </div>
@@ -35,24 +37,26 @@
             <!-- 普通链接 -->
             <li class="{% block nav_主页_active %} {% endblock %}">
                 <a href="/">
-                    <span class="iconfont icon-jia"></span>
+                    <i class="iconfont icon-jia"></i>
                     首页
                 </a>
             </li>
             <li class="{% block nav_博客_active %} {% endblock %}">
                 <a href="{% url 'blog:post_list' %}">
-                    <span class="iconfont icon-boke"></span>
+                    <i class="iconfont icon-boke"></i>
                     博客
                 </a>
             </li>
 
             <!-- 下拉链接  -->
-            <li class="dropdown {% block nav_分类_active %}{% endblock %}" >
+            <li class="dropdown {% block nav_分类_active %}{% endblock %}">
                 <a href="{% url 'blog:tag_list' %}">
-                    <span class="iconfont icon-dangan"></span>
+                    <i class="iconfont icon-dangan"></i>
                     分类
                 </a>
-                <ul class="nav-sub-list clearfix"  role="menu" > <!-- 这里的参数还可以动态换成标签内容吗？--> <!-- 注意 这里的参数传递用 字符串 -->
+                <ul class="nav-sub-list clearfix" role="menu">
+                    <!-- 这里的参数还可以动态换成标签内容吗？-->
+                    <!-- 注意 这里的参数传递用 字符串 -->
                     <li><a href="{% url 'blog:post_list_by_tag' tag_slug='java' %}"> Java </a></li>
                     <li><a href="{% url 'blog:post_list_by_tag' tag_slug='python' %}"> python </a></li>
                     <li><a href="{% url 'blog:post_list_by_tag' tag_slug='ruby' %}"> ruby </a></li>
@@ -61,33 +65,27 @@
         </ul>
 
         <!-- 搜索框表单--  action = 相应请求(为get请求)添加在form表单中!!-->
-        <div class="nav-search right" >
+        <div class="nav-search right">
             <form action="{% url 'search' %}">
                 <!-- 搜索框 -->
                 <input type="text" name="kw" class="form-control" placeholder="搜索" autocomplete="off">
                 <!-- 按钮 -->
                 <button type="submit" class="btn btn-default ">
-                    <span class="iconfont icon-sousuo"></span>
+                    <i class="iconfont icon-sousuo"></i>
                 </button>
             </form>
         </div>
 
     </nav>
 
-    <!-- 必有2. 横幅区 -->
-    <div class="banner">
-        <!-- 标语 -->
-        <div class="intro">
-            <h1 style="margin-bottom:12px;">Hello_stefan</h1>
-            <p style="font-size: 20px;">做属于自己的博客</p>
-        </div>
-    </div>
+    <!-- banner -->
+    {% block banner %}
+    {% endblock %}
 
-    <!-- 主内容区 -->
-
+    <!-- 2. 主内容区 -->
     <div class="main clearfix">
 
-         <!-- 填充块1：侧边栏 -->
+        <!-- 填充块1：侧边栏 -->
         <div class="sidebar">
             {% block sidebar %}
             {% endblock %}
@@ -101,36 +99,13 @@
 
     </div>
 
-    
-
+    <!-- 3. footer区 必有-->
     <div class="footer">
     </div>
 
-    <script>
-    // 侧边栏的二级菜单;
-        // 获取下拉按钮
-        var slideBtns = document.getElementsByClassName("slide-btn");
-        // 注册点击事件 → 按钮自身更改类名
-        for (var i = 0; i < slideBtns.length; i++) {
-            slideBtns[i].onclick = function () {
-                this.classList.toggle("active");
-            }
-        }
-    </script>
-    
-    <script>
-    // 侧边栏点击使 右侧内容偏移;
-        $(function() {
 
-            var content = $(".sidebar").has("#check").siblings(".content");
-
-            $("#open").click(function() {
-                content.css("margin-left","10%")
-            })
-            $("#close").click(function() {
-                content.css("margin-left","0px")
-            })
-        })
-    </script>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/sidebar.js' %}"></script>
 </body>
+
 </html>

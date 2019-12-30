@@ -1,5 +1,5 @@
 <!-- 
-	页码模板: 适用于多个对象
+	列表页的页码模板: 适用于多个对象
 	参数    {{ posts }} 为页面对象
 			{{ page_range }} 为要显示的页码列表
 
@@ -7,14 +7,14 @@
 						kw=   (用于搜索)
  -->
 
-<nav class="pager">
+<div class="pager">
 
 	<ul>
 		<!-- 若有上页 -->
 		{% if posts.has_previous %}
 		<li class="previous">
 			<a href="?page={{ posts.previous_page_number }}&kw={{search_keyword}}">
-				<span class="iconfont icon-shangyiyecu"></span>
+				<i class="iconfont icon-shangyiyecu"></i>
 			</a>
 		</li>
 		{% endif %}
@@ -32,13 +32,13 @@
 		{%  if posts.has_next %}
 		<li class="next">
 			<a href="?page={{ posts.next_page_number }}&kw={{search_keyword}}">
-				<span class="iconfont icon-xiayiyecu"></span>
+				<i class="iconfont icon-xiayiyecu"></i>
 			</a>
 		</li>
 		{% endif %}
   </ul>
 
-</nav>
+</div>
 
 <!-- 将分页样式和分页html 写在一起，作为一个组件！！ -->
 <style type="text/css">

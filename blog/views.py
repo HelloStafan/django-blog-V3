@@ -76,19 +76,18 @@ def get_date_with_count(posts):
                                                     publish__month=m).count()
     return all_date
 
-def prettify_md(posts):
+def prettify_md(post):
     '''
     美化markdown:
         参数:  对象
         返回:  无
     '''
-    for post in posts:
-        post.body = markdown(post.body, 
-                             extensions=[
-                                'markdown.extensions.extra',
-                                'markdown.extensions.codehilite',
-                                'markdown.extensions.toc',
-                            ])
+    post.body = markdown(post.body,                       
+                        extensions = [
+                            'markdown.extensions.extra',
+                            'markdown.extensions.codehilite',
+                            'markdown.extensions.toc',
+                        ])
 
 # 定义一些变量
 all_tags = Tag.objects.all()  # 所有标签
@@ -103,10 +102,9 @@ def post_list(request):
     
     # 分页
     posts = paginate(all_posts, request.GET)
-    # 获取页数范围
+    # 获取页码范围
     page_range = get_page_range(posts)
 
-    prettify_md(posts)
     return render(request,
                   'blog/post_list.html',
                   { 
@@ -128,9 +126,8 @@ def post_list_by_tag(request, tag_slug):
 
     # 分页
     posts = paginate(posts, request.GET)
-    # 获取页面范围
+    # 获取页码范围
     page_range = get_page_range(posts)
-    prettify_md(posts)
 
     return render(request,
                   "blog/post_list_by_tag.html",
@@ -155,7 +152,6 @@ def post_list_by_date(request, year, month):
     posts = paginate(posts, request.GET)
     # 获取页面范围
     page_range = get_page_range(posts)
-    prettify_md(posts)
 
     date = str(year) + "年" + str(month) + "月"
 
@@ -176,35 +172,31 @@ def post_list_by_date(request, year, month):
 # 2. 帖子详情
 def post_detail(request, year, month, day, title):
 
-    # 将QuerySet 列表化
-    posts_list = list(all_posts)
-    # 分页对象(以1分页)
-    paginator = Paginator(posts_list, 1) 
-
-
     # 获取所请求的帖子
     post = get_object_or_404(Post, status='published',
                              publish__year=year,
                              publish__month=month,
                              publish__day=day,
                              title=title,
-                             )
-    post.body = markdown(post.body, extensions=[
-                                     'markdown.extensions.extra',
-                                     'markdown.extensions.codehilite',
-                                     'markdown.extensions.toc',
-                                  ])
+                                 )
+    prettify_md(post)
+    print(post)
+    # 获取当前post的页数     
+    paginator = Paginator(all_posts, 1)
 
-    page = posts_list.index(post)+1  # 当前页
+    all_posts_list = list(all_posts)
+    page = all_posts_list.index(post) + 1   
+    
 
-    before_object = paginator.get_page(page-1)
-    after_object = paginator.get_page(page+1)
+    # 获取上/下一篇     不是数字，返回第一页;数字不对，最后一页
+    before_post = paginator.get_page(page + 1)
+    after_post = paginator.get_page(page - 1)
 
     return render(request,
                   "blog/detail.html",
-                  {'post':post,  # 该页显示  1.帖子详情
-                   'Before_object': before_object,  # 前一页的帖子对象
-                   'After_object': after_object,  # 后一页的帖子对象
+                  {'post':post,  # 当前帖子对象
+                   'before_post': before_post,  # 前一个帖子对象
+                   'after_post': after_post,  # 后一个帖子对象
                    })
 
 
