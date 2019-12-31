@@ -7,10 +7,7 @@
 {% block nav_主页_active %}active{% endblock %}
 
 
-<!-- 内容块 -->
-{% block content %}
-	<h2> 欢迎访问我的网站！ </h2>
-{% endblock %}
+
 	
 <!-- 2. 横幅区  -->
 {% block banner %}
@@ -20,24 +17,32 @@
 			<h1 style="margin-bottom:12px;">Hello_stefan</h1>
 			<p style="font-size: 20px;">做属于自己的博客</p>
 		</div>
+		<!-- 更多 -->
+		<div class="more">
+			<span>READ MORE</span>
+			<i class="iconfont icon-jiantou8"></i>
+		</div>
 	</div>
 {% endblock %}
 
-	<style>	
-	/* 不需要侧边栏 */
-	.sidebar {
-    	display: none;
-	}
-	/* 居中 */
-	.main {
-		padding-left: 0 ;
-	}
-	.content {
-		margin: 0 auto;
-	}
-	.content h2 {
-		text-align: center;
-		line-height: 400px;
-    }
-	</style>
+
+<!-- 侧边栏 -->
+{% block sidebar %}
+	{% include "components/sidebar.html" with all_tags=all_tags all_date=all_date %}
+{% endblock %}
+
+<!-- 内容块 -->
+{% block content %}
+	<h1 class="pageTitle">
+		{% block pageTitle %} My Blog {% endblock %}
+	</h1>
+
+	{% include "components/list.html" %}
+	{% include "components/pagination_list.html" %}
+	<script src="../static/js/home.js"></script>
+{% endblock %}
+
+
+
+	
 

@@ -93,7 +93,7 @@ def prettify_md(post):
 all_tags = Tag.objects.all()  # 所有标签
 all_posts = Post.published.all()  # 所有帖子
 
-tags = get_tags_with_count(all_tags)
+all_tags = get_tags_with_count(all_tags)
 all_date = get_date_with_count(all_posts)
 
 
@@ -112,7 +112,7 @@ def post_list(request):
                    'posts': posts,  
                    'page_range': page_range,  
                     # 侧边栏信息    
-                   'tags': tags,
+                   'all_tags': all_tags,
                    "all_date": all_date,
                    }) 
 
@@ -138,7 +138,7 @@ def post_list_by_tag(request, tag_slug):
                    'posts':posts,
                    'page_range':page_range,
                     # 侧边栏信息    
-                   'tags':tags,
+                   'all_tags':all_tags,
                    "all_date":all_date,
                   })
 
@@ -164,7 +164,7 @@ def post_list_by_date(request, year, month):
                    'posts':posts,
                    'page_range':page_range,
                     # 侧边栏信息    
-                   'tags':tags,
+                   'all_tags':all_tags,
                    "all_date":all_date,
                   })
 

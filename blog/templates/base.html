@@ -6,7 +6,7 @@
     <!-- 填充块1. 标题 -->
     <title>{% block title %}{% endblock %}</title>
     <!-- 字体图标 -->
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1445497_ccweilzig1d.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1445497_ttw0sz5qwfa.css">
     <!-- 页面样式 -->
     <link href="{% static 'css/reset.css' %}" rel="stylesheet">
     <link href="{% static 'css/common.css' %}" rel="stylesheet">
@@ -16,8 +16,8 @@
 
     <link rel="icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
     <link rel="shortcut icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
-
-
+    <!-- jq在最上面 -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
 </head>
 
 <body>
@@ -36,13 +36,13 @@
         <ul class="nav-list left">
             <!-- 普通链接 -->
             <li class="{% block nav_主页_active %} {% endblock %}">
-                <a href="/">
+                <a href="/" id="home">
                     <i class="iconfont icon-jia"></i>
                     首页
                 </a>
             </li>
             <li class="{% block nav_博客_active %} {% endblock %}">
-                <a href="{% url 'blog:post_list' %}">
+                <a href="{% url 'blog:post_list' %}" id="blog">
                     <i class="iconfont icon-boke"></i>
                     博客
                 </a>
@@ -50,7 +50,7 @@
 
             <!-- 下拉链接  -->
             <li class="dropdown {% block nav_分类_active %}{% endblock %}">
-                <a href="{% url 'blog:tag_list' %}">
+                <a href="{% url 'blog:tag_list' %}" id="tag">
                     <i class="iconfont icon-dangan"></i>
                     分类
                 </a>
@@ -83,7 +83,7 @@
     {% endblock %}
 
     <!-- 2. 主内容区 -->
-    <div class="main clearfix">
+    <div class="main clearfix" id="main">
 
         <!-- 填充块1：侧边栏 -->
         <div class="sidebar">
@@ -104,7 +104,7 @@
     </div>
 
 
-    <script src="{% static 'js/jquery.min.js' %}"></script>
+    
     <script src="{% static 'js/sidebar.js' %}"></script>
 </body>
 

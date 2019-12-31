@@ -1,7 +1,12 @@
+# 导入上层目录包
+import sys
+sys.path.append('../')
 from django.shortcuts import render
 
 from django.db.models import Q  # Q 复杂搜索
 from blog.models import Post
+from blog.views import all_posts, all_tags, all_date, \
+                        paginate, get_page_range
 
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
@@ -11,10 +16,21 @@ from django.core.paginator import Paginator, EmptyPage, \
 
 # 主页面
 def home(request):
-    paraments = {}
-    return render(request,
+    # 分页
+    posts = paginate(all_posts, request.GET)
+    # 获取页码范围
+    page_range = get_page_range(posts)
+
+    return render( request,
                   'home.html',
-                  paraments)
+                  { # 列表信息
+                   'posts':posts,
+                   'page_range':page_range,
+                    # 侧边栏信息    
+                   'all_tags':all_tags,
+                   "all_date":all_date,})
+
+
 
 # ★搜索页面
 def search(request):
@@ -29,19 +45,14 @@ def search(request):
         else:
             condition = condition|Q(title__icontains=word)
 
-    # 符合关键字的全部帖子  # Step-1.注意 获取对象 的 __双下划线的使用
+    # Step-1获取帖子  .注意 获取对象 的 __双下划线的使用
     search_posts = Post.published.filter(condition)
 
     # Step-2.分页机制
-    paginator = Paginator(search_posts, 6)
-    page = request.GET.get('page', 1)
-    posts = paginator.page(page)
+    posts = paginate(search_posts, request.GET)
 
-    # Step-3 优化显示
-    current_page = posts.number;  # 当前页数
-    max_page = paginator.num_pages;  # 总页数 
-    
-    page_range = list(range(max(current_page-2,1),min(current_page+2,max_page)+1))
+    # Step-3 优化显示 ———— 获取页码范围
+    page_range = get_page_range(posts)
     
     return render(request,
                   'blog/search.html',  

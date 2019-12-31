@@ -1,12 +1,16 @@
 ﻿/* base.html 的样式：被其他html文件继承 */
 @charset "utf-8";
 
-body {
-    min-height: 1200px;
-
-    background-color: rgb(231, 226, 226);
-    font-family: "微软雅黑",freight-sans-pro, helvetica, sans-serif; 
+html {
+    scroll-behavior: smooth;
 }
+body {
+    /* min-height: 1200px; */
+    overflow: hidden;
+    background-color: rgb(231, 226, 226);
+    font-family: "微软雅黑", freight-sans-pro, helvetica, sans-serif; 
+}
+
 /* a标签样式 ———— 各区域不同 */
     /* 导航栏 */
 .nav a:hover {
@@ -135,18 +139,20 @@ body {
 /* 2. 横幅区 */
 .banner {
     height: 100vh;
+    transition: height .7s, opacity 1.4s;
+
     opacity: .7;
     background: url(../img/banner2.jpeg) no-repeat fixed; 
     background-size: 100% 100%;
 
     position: relative;
 }
-.banner::after {
+.banner::after {  /* 伪元素蒙版 */
     content: "";
     display: block;
     height: 100%;
     width: 100%;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.5);
 }
 .banner .intro {
     /* 可以用弹性布局 */
@@ -156,19 +162,57 @@ body {
     top: 0;
     bottom: 0;
     left: 0;
-    right: 0;
+    right: 0; 
     margin: auto;
 
     color: #fff;  
     text-align: center;
     line-height: 40px;
 }
+.banner .more {
+    position: absolute;
+    width: 120px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    transform: translateY(-50%);
+    /* 内部文字 */
+    text-align: center;
+    line-height: 30px; 
+    font-size: 16px;
+    color: #ccc;
+    /* 效果 */
+    cursor: pointer;
+    transition: padding .5s;
+}
+.banner .more i {
+    
+    display: block;
+}
+.banner .more:hover {
+    padding-bottom: 6px;
+}
+
 
 
 /* 3. main区 */
+/* 定义动画 多个关键帧 */
+@keyframes animate-slide-in-down{
+    from {
+        transform:translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform:translateY(0);
+        opacity: 1;
+    }
+}
 .main {  
     padding-left: 40px;
     padding-top: 80px;
+    
+    animation: animate-slide-in-down .5s;
 }
 /* content区 */
 /* 整体 */

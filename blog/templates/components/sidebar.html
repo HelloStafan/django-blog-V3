@@ -23,7 +23,7 @@
                 分类目录
             </h4>
             <ul class="content">
-                {% for tag in tags %}
+                {% for tag in all_tags %}
                     <li>
                         <a href="{% url 'blog:post_list_by_tag' tag.slug %}">
                             {{ tag }} ({{ tag.posts_count }})
