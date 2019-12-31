@@ -108,7 +108,7 @@ label #close {
 .Bydate .content, 
 .Bytag .content {
     overflow: hidden;  /* 之前已经溢出了!! 没有设置 */
-    font-size: 18px;
+    font-size: 0.9em;
     line-height: 1.5;
 
 

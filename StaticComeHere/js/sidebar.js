@@ -12,10 +12,8 @@ $(function () {
         }
     }
 
-    console.log(slideBtns)
     // 侧边栏点击使 右侧内容偏移;
     var content = $(".sidebar").has("#check").siblings(".content");
-    console.log(content)
 
     $("#close").click(function () {
         content.css("margin-left", "0px")
