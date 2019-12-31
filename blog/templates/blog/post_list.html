@@ -8,19 +8,16 @@
 {% block nav_博客_active %}active{% endblock %}
 
 
-<!-- 侧边栏  -->
-
-{% block sidebar %}
-	{% include "../components/sidebar.html" with all_tags=all_tags all_date=all_date %}
-{% endblock %}
-
-
 {% block content %}
-	<h1 class="pageTitle">
-		{% block pageTitle %} My Blog {% endblock %}
-	</h1>
-	
-	{% include "../components/list.html" %}
-	{% include "../components/pagination_list.html" %}
-{% endblock %}
 
+	<div class="content">
+		<h1 class="pageTitle">
+			{% block pageTitle %} My Blog {% endblock %}
+		</h1>
+
+		{% include "../components/list.html" %}
+		{% include "../components/pagination_list.html" %}
+		<script src="../static/js/home.js"></script>
+	</div>	
+	
+{% endblock %}

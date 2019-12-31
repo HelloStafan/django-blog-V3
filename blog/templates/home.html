@@ -7,8 +7,6 @@
 {% block nav_主页_active %}active{% endblock %}
 
 
-
-	
 <!-- 2. 横幅区  -->
 {% block banner %}
 	<div class="banner">
@@ -26,21 +24,19 @@
 {% endblock %}
 
 
-<!-- 侧边栏 -->
-{% block sidebar %}
-	{% include "components/sidebar.html" with all_tags=all_tags all_date=all_date %}
-{% endblock %}
-
 <!-- 内容块 -->
 {% block content %}
-	<h1 class="pageTitle">
-		{% block pageTitle %} My Blog {% endblock %}
-	</h1>
+	<div class="content">
+		<h1 class="pageTitle">
+			{% block pageTitle %} My Blog {% endblock %}
+		</h1>
 
-	{% include "components/list.html" %}
-	{% include "components/pagination_list.html" %}
-	<script src="../static/js/home.js"></script>
+		{% include "components/list.html" %}
+		{% include "components/pagination_list.html" %}
+		<script src="../static/js/home.js"></script>
+	</div>	
 {% endblock %}
+
 
 
 

@@ -29,6 +29,8 @@ body {
 .nav {
     height: 50px;
     background-color: rgba(82, 132, 175, 0.7);
+    /* 渐变颜色 */
+    /* background-image: linear-gradient(to bottom,); */
 }
 
 .nav-fixed-top {
@@ -38,25 +40,23 @@ body {
     z-index: 2;
 }
     /* 1. logo区 */
-.nav .nav-header a{
-    display: inline-block;
-    line-height: 50px;
-    padding: 0 15px;
-    font-size: 22px;
+.nav .nav-logo a{
+    display: block;
+    line-height: 20px;
+    padding: 15px;
 }
-
     /* 2. li区 */
 .nav .nav-list {
     float: left;
-    font-size: 18px;
+    font-size: 16px;
 }
 .nav .nav-list li {
-    display: inline-block;
+    float: left;
 }
 .nav .nav-list li a{
-    display: inline-block;
-    line-height: 50px;
-    padding: 0 15px;
+    display: block;
+    line-height: 20px;
+    padding: 15px;
 }
 /* 二级菜单 */
 .nav .nav-list .dropdown {
@@ -82,7 +82,7 @@ body {
     background-color: #fff;
 }
 .nav .nav-list li.active a {
-    color: black;
+    color: #555;
 }
 /* 一级菜单激活二级菜单 */
 .nav .dropdown:hover .nav-sub-list{
@@ -94,7 +94,7 @@ body {
     background-color: #fff;
 }
 .nav .dropdown .nav-sub-list li:hover a {
-    color: black;
+    color: #555;
 }
 
     /* 3. 搜索框 */
@@ -119,8 +119,8 @@ body {
 }
 .nav .nav-search .btn{
     position: absolute;  /* 定位 */
-    top: 12px;
-    right: 4px;  
+    top: 28%;
+    right: 2%;  
 
     border-radius: 50%;   /* 样式：大小*/
     height: 25px;
@@ -209,17 +209,19 @@ body {
     }
 }
 .main {  
+    display: flex;  
+    /* 定位元素  sidebar会有影响吗？？？？？？ */
     padding-left: 40px;
-    padding-top: 80px;
+    padding-top: 60px;
     
     animation: animate-slide-in-down .5s;
 }
 /* content区 */
 /* 整体 */
 .main > .content {  
-    width: 70%;
+    flex: 4;
+    min-height: 800px;
     padding: 0 40px;
-    margin-right: 50px;
     transition: margin .5s;
 }
 .main > .content .pageTitle { 
@@ -235,3 +237,25 @@ body > .footer {
     background-color: #848484;
 }
 
+
+/* 公告栏 */
+.board {
+    flex: 1;
+    margin-right: 20px;
+    margin-top: 72px;
+}
+.board .header {
+    /* width: 100%; */
+    height: 2em;
+    background-color: lightskyblue;
+
+    border: 3px solid #ccc;
+
+    margin-bottom: 5px;
+    padding: 20px 20px 0 20px;
+    text-align: center;
+}
+.board .body {
+    height: 200px;
+    background-color: #fff;
+}

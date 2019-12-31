@@ -197,6 +197,9 @@ def post_detail(request, year, month, day, title):
                   {'post':post,  # 当前帖子对象
                    'before_post': before_post,  # 前一个帖子对象
                    'after_post': after_post,  # 后一个帖子对象
+                   # 侧边栏信息    
+                   'all_tags': all_tags,
+                   "all_date": all_date,
                    })
 
 

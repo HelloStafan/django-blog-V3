@@ -3,7 +3,8 @@
 /* 头部信息 */
 .article {
     min-height: 800px;
-    padding-left: 40px;
+    flex: 3;
+    padding: 0 40px;
 }
 .article .header {
     background-color: rgb(245, 245, 245);

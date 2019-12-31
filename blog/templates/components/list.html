@@ -7,6 +7,7 @@
 <link href="{% static 'css/list.css' %}" rel="stylesheet">
 <!-- 好像只能用  加载静态文件来使用，直接引入不行? -->
 
+<div class="post-list">
 	<!-- 如果有帖子渲染 -->
 	{% if posts %}
 		<!-- 渲染 -->
@@ -47,5 +48,5 @@
 	{% else %}
 		<h3> 暂无博客，敬请期待 </h3>
 	{% endif %}
-
+</div>
 

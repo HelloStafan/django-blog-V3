@@ -209,17 +209,19 @@ body {
     }
 }
 .main {  
+    display: flex;  
+    /* 定位元素  sidebar会有影响吗？？？？？？ */
     padding-left: 40px;
-    padding-top: 80px;
+    padding-top: 60px;
     
     animation: animate-slide-in-down .5s;
 }
 /* content区 */
 /* 整体 */
 .main > .content {  
-    width: 70%;
+    flex: 4;
+    min-height: 800px;
     padding: 0 40px;
-    margin-right: 50px;
     transition: margin .5s;
 }
 .main > .content .pageTitle { 
@@ -235,3 +237,25 @@ body > .footer {
     background-color: #848484;
 }
 
+
+/* 公告栏 */
+.board {
+    flex: 1;
+    margin-right: 20px;
+    margin-top: 72px;
+}
+.board .header {
+    /* width: 100%; */
+    height: 2em;
+    background-color: lightskyblue;
+
+    border: 3px solid #ccc;
+
+    margin-bottom: 5px;
+    padding: 20px 20px 0 20px;
+    text-align: center;
+}
+.board .body {
+    height: 200px;
+    background-color: #fff;
+}
