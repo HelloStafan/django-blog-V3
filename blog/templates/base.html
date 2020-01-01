@@ -12,7 +12,6 @@
     <link href="{% static 'css/common.css' %}" rel="stylesheet">
     <link href="{% static 'css/base.css' %}" rel="stylesheet">
     <link href="{% static 'css/sidebar.css' %}" rel="stylesheet">
-
     <!-- 代码高亮样式 -->
     <link rel="stylesheet" href="{% static 'css/highlights/vs.css' %}">
 
@@ -24,18 +23,18 @@
 
 <body>
 
-    <!-- 1. 导航区 必有 -->
-    <nav class="nav nav-fixed-top">
+    <!-- 1. 导航栏-->
+    <nav class="navbar navbar-fixed-top navbar-dark">
 
         <!-- logo -->
-        <div class="nav-logo left">
+        <div class="navbar-logo left">
             <a href="#">
                 <!-- 可图片 可文字-->
                 Hello_stafen
             </a>
         </div>
         <!-- 导航list -->
-        <ul class="nav-list left">
+        <ul class="navbar-list left">
             <!-- 普通链接 -->
             <li class="{% block nav_主页_active %} {% endblock %}">
                 <a href="/" id="home">
@@ -56,7 +55,7 @@
                     <i class="iconfont icon-dangan"></i>
                     分类
                 </a>
-                <ul class="nav-sub-list clearfix" role="menu">
+                <ul class="navbar-sub-list clearfix" role="menu">
                     <!-- 这里的参数还可以动态换成标签内容吗？-->
                     <!-- 注意 这里的参数传递用 字符串 -->
                     <li><a href="{% url 'blog:post_list_by_tag' tag_slug='java' %}"> Java </a></li>
@@ -67,7 +66,7 @@
         </ul>
 
         <!-- 搜索框表单--  action = 相应请求(为get请求)添加在form表单中!!-->
-        <div class="nav-search right">
+        <div class="navbar-search right">
             <form action="{% url 'search' %}">
                 <!-- 搜索框 -->
                 <input type="text" name="kw" class="form-control" placeholder="搜索" autocomplete="off">
@@ -158,6 +157,8 @@
 
     
     <script src="{% static 'js/sidebar.js' %}"></script>
+    <script src="{% static 'js/navbar.js' %}"></script>
+
 </body>
 
 </html>

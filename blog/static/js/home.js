@@ -1,6 +1,11 @@
 
 $(function () {
-    
+
+    // 首页的特殊样式
+    // 将首页一开始设为无法滚动
+    $("body").css("overflow","hidden");
+
+
     // 更多
     $(".more").click(function() {
 
@@ -15,10 +20,17 @@ $(function () {
         // 3. 滚动恢复正常
         $("body").css("overflow","scroll");
         $("html").animate({scrollTop:0});
+
+        // 2020/1/1 补充
+        // 4. 背景色还原
+        $(".navbar").removeClass("navbar-light");
+        $(".navbar").addClass("navbar-dark");
     })
         
     
-    // 点击首页   直接刷新吧...
+
+  
+    // 点击首页   还是直接刷新吧...
 
 
     // 点击博客  , 滚动恢复正常,,,,恢复不了了。
@@ -33,5 +45,7 @@ $(function () {
         timer = setTimeout(scrollAble, 600);
         console.log(1)
     })
-    // 不行，还是会清空，整个文档都清空了
+    // 不行，还是会清空，因为浏览器刷新，整个文档都清空了
+    // ↓
+    // 解决:  见本文件最上面
 })

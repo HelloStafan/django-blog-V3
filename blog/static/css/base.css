@@ -5,15 +5,13 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    /* min-height: 1200px; */
-    overflow: hidden;
     background-color: rgb(231, 226, 226);
     font-family: "微软雅黑", freight-sans-pro, helvetica, sans-serif; 
 }
 
 /* a标签样式 ———— 各区域不同 */
     /* 导航栏 */
-.nav a:hover {
+.navbar a:hover {
     color: rgb(226, 226, 177);
 }
     /* 标签 */
@@ -26,43 +24,58 @@ body {
 
 
 /* 1. 导航区 */
-.nav {
+.navbar {
     height: 50px;
-    background-color: rgba(82, 132, 175, 0.7);
-    /* 渐变颜色 */
-    /* background-image: linear-gradient(to bottom,); */
+    transition: transform .3s, background .3s;
+    /* 一种 */
+    /* background-color: rgba(82, 132, 175, 0.7); */
+    /* 第二种 */
+    /* background-color: #f8f8f8; */
+    /* box-shadow: 0 0 5px #888; */
 }
-
-.nav-fixed-top {
+/* 导航栏固定位置的类名 */
+.navbar-fixed-top {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 2;
 }
+/* 导航栏专属动态行为类名 */
+/* 向上slide */
+.navbar-slide-up {
+    transform: translateY(-100%);
+}
+/* 导航栏专属背景类名 */
+.navbar-light {
+    background-color: transparent;
+}
+.navbar-dark {
+    background-color: rgba(82, 132, 175, 0.7);
+}
     /* 1. logo区 */
-.nav .nav-logo a{
+.navbar .navbar-logo a{
     display: block;
     line-height: 20px;
     padding: 15px;
 }
     /* 2. li区 */
-.nav .nav-list {
+.navbar .navbar-list {
     float: left;
     font-size: 16px;
 }
-.nav .nav-list li {
+.navbar .navbar-list li {
     float: left;
 }
-.nav .nav-list li a{
+.navbar .navbar-list li a{
     display: block;
     line-height: 20px;
     padding: 15px;
 }
 /* 二级菜单 */
-.nav .nav-list .dropdown {
+.navbar .navbar-list .dropdown {
     position: relative;
 }  
-.nav .dropdown .nav-sub-list {
+.navbar .dropdown .navbar-sub-list {
     position: absolute;   /* 定位 */
     top: 0px;
     left: 120px; 
@@ -72,38 +85,38 @@ body {
     opacity: 0;
     transition: opacity 1s, left .5s;
 }
-.nav .dropdown .nav-sub-list li {
+.navbar .dropdown .navbar-sub-list li {
     float: left;
 }
 
 /* 动态 */
 /* 激活的一级菜单 */
-.nav .nav-list li.active {
+.navbar .navbar-list li.active {
     background-color: #fff;
 }
-.nav .nav-list li.active a {
+.navbar .navbar-list li.active a {
     color: #555;
 }
 /* 一级菜单激活二级菜单 */
-.nav .dropdown:hover .nav-sub-list{
+.navbar .dropdown:hover .navbar-sub-list{
     opacity: 1;
     left: 90px;
 }
 /* 二级菜单鼠标经过 */
-.nav .dropdown .nav-sub-list li:hover {
+.navbar .dropdown .navbar-sub-list li:hover {
     background-color: #fff;
 }
-.nav .dropdown .nav-sub-list li:hover a {
+.navbar .dropdown .navbar-sub-list li:hover a {
     color: #555;
 }
 
     /* 3. 搜索框 */
-.nav .nav-search {
+.navbar .navbar-search {
     height: 100%;
     margin-right: 30px;
     position: relative;
 }
-.nav .nav-search .form-control{
+.navbar .navbar-search .form-control{
     width: 150px;
     height: 30px;
     padding: 0 40px 0 20px;
@@ -117,7 +130,7 @@ body {
 
     transition: width .5s;
 }
-.nav .nav-search .btn{
+.navbar .navbar-search .btn{
     position: absolute;  /* 定位 */
     top: 28%;
     right: 2%;  
@@ -126,11 +139,11 @@ body {
     height: 25px;
     width: 25px;
 }
-.nav .nav-search .form-control:focus{
+.navbar .navbar-search .form-control:focus{
     width: 240px;
     outline: none;
 }
-.nav .nav-search .form-control:focus + .btn{
+.navbar .navbar-search .form-control:focus + .btn{
     background-color: #969696;
     color: #fff;
 }

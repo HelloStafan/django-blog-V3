@@ -34,7 +34,32 @@
 		{% include "components/list.html" %}
 		{% include "components/pagination_list.html" %}
 		<script src="../static/js/home.js"></script>
+		<!-- 直接引入静态文件,模板引入好像不行 -->
 	</div>	
+	<style>	
+		/* 首页的导航栏样式：需要弄一下 */
+		.navbar {
+			background-color: transparent;
+			font-size: 20px;
+			font-weight: 900;
+		}
+		.navbar .navbar-list li.active {
+    		background-color: transparent;
+		}
+		.navbar .navbar-list li.active a {
+			/* #333; */
+    		color: #333;
+		}
+		.navbar .navbar-list li a {
+			color: #333;
+		}
+		.navbar .navbar-list li a:hover {
+			color: #fff;
+		}
+		.navbar-sub-list {
+			display: none;
+		}
+	</style>
 {% endblock %}
 
 
