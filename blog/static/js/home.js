@@ -5,8 +5,9 @@ $(function () {
     var screenHeight = window.innerHeight;
     $(".banner").height(screenHeight);
 
-    // 将首页一开始设为无法滚动
+    // 将首页一开始设为无法滚动（只有这个有关闭这两个属性的方法，所以在这里设置）
     $("body").css("overflow","hidden");
+    $("body").css("position","fixed");
 
 
     // 更多
@@ -22,6 +23,7 @@ $(function () {
 
         // 3. 滚动恢复正常
         $("body").css("overflow","scroll");
+        $("body").css("position","static");
         $("html").animate({scrollTop:0});
 
         // 2020/1/1 补充

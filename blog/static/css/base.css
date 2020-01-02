@@ -5,7 +5,7 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    width: 100%; /* 设置不能滚动的解决！！！ */
+    width: 100%; /* 无法设置为无法滚动的解决！！！ */
     
     background-color: rgb(231, 226, 226);
     font-family: "微软雅黑", freight-sans-pro, helvetica, sans-serif; 
