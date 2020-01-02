@@ -3,6 +3,7 @@
     宽度由父级设定百分比,子级继承;
     高度由子级撑开，利用a元素的行高和字体以及ul的min-height  
  */
+
 /* 1. check区 */
 #check {
     display: none;

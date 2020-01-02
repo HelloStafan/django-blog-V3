@@ -19,64 +19,70 @@
     <link rel="shortcut icon" href="{% static '/favicon.ico' %}" type="image/x-icon" />
     <!-- jq在最上面 -->
     <script src="{% static 'js/jquery.min.js' %}"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 </head>
 
 <body>
 
     <!-- 1. 导航栏-->
-    <nav class="navbar navbar-fixed-top navbar-dark">
+    <nav class="navbar navbar-fixed-top navbar-transparent">
 
         <!-- logo -->
-        <div class="navbar-logo left">
+        <div class="navbar-logo">
             <a href="#">
-                <!-- 可图片 可文字-->
                 Hello_stafen
             </a>
         </div>
-        <!-- 导航list -->
-        <ul class="navbar-list left">
-            <!-- 普通链接 -->
-            <li class="{% block nav_主页_active %} {% endblock %}">
-                <a href="/" id="home">
-                    <i class="iconfont icon-jia"></i>
-                    首页
-                </a>
-            </li>
-            <li class="{% block nav_博客_active %} {% endblock %}">
-                <a href="{% url 'blog:post_list' %}" id="blog">
-                    <i class="iconfont icon-boke"></i>
-                    博客
-                </a>
-            </li>
+        <!-- 替代按钮 -->
+        <botton class="navbar-toggle">
+            <i class="iconfont icon-bars"></i>
+        </botton>
+        <!-- 坍塌项 -->
+        <div class="navbar-collapse ">
+            <!-- 1. 导航list -->
+            <ul class="navbar-list">
+                <!-- 普通链接 -->
+                <li class="{% block nav_主页_active %} {% endblock %}">
+                    <a href="/" id="home">
+                        <i class="iconfont icon-jia"></i>
+                        首页
+                    </a>
+                </li>
+                <li class="{% block nav_博客_active %} {% endblock %}">
+                    <a href="{% url 'blog:post_list' %}" id="blog">
+                        <i class="iconfont icon-boke"></i>
+                        博客
+                    </a>
+                </li>
 
-            <!-- 下拉链接  -->
-            <li class="dropdown {% block nav_分类_active %}{% endblock %}">
-                <a href="{% url 'blog:tag_list' %}" id="tag">
-                    <i class="iconfont icon-dangan"></i>
-                    分类
-                </a>
-                <ul class="navbar-sub-list clearfix" role="menu">
-                    <!-- 这里的参数还可以动态换成标签内容吗？-->
-                    <!-- 注意 这里的参数传递用 字符串 -->
-                    <li><a href="{% url 'blog:post_list_by_tag' tag_slug='java' %}"> Java </a></li>
-                    <li><a href="{% url 'blog:post_list_by_tag' tag_slug='python' %}"> python </a></li>
-                    <li><a href="{% url 'blog:post_list_by_tag' tag_slug='ruby' %}"> ruby </a></li>
-                </ul>
-            </li>
-        </ul>
+                <!-- 下拉链接  -->
+                <li class="dropdown {% block nav_分类_active %}{% endblock %}">
+                    <a href="{% url 'blog:tag_list' %}" id="tag">
+                        <i class="iconfont icon-dangan"></i>
+                        分类
+                    </a>
+                    <ul class="navbar-sub-list clearfix" role="menu">
+                        <!-- 这里的参数还可以动态换成标签内容吗？-->
+                        <!-- 注意 这里的参数传递用 字符串 -->
+                        <li><a href="{% url 'blog:post_list_by_tag' tag_slug='java' %}"> Java </a></li>
+                        <li><a href="{% url 'blog:post_list_by_tag' tag_slug='python' %}"> python </a></li>
+                        <li><a href="{% url 'blog:post_list_by_tag' tag_slug='ruby' %}"> ruby </a></li>
+                    </ul>
+                </li>
+            </ul>
 
-        <!-- 搜索框表单--  action = 相应请求(为get请求)添加在form表单中!!-->
-        <div class="navbar-search right">
-            <form action="{% url 'search' %}">
-                <!-- 搜索框 -->
-                <input type="text" name="kw" class="form-control" placeholder="搜索" autocomplete="off">
-                <!-- 按钮 -->
-                <button type="submit" class="btn btn-default ">
-                    <i class="iconfont icon-sousuo"></i>
-                </button>
-            </form>
+            <!-- 2. 搜索框表单--  action = 相应请求(为get请求)添加在form表单中!!-->
+            <div class="navbar-search ">
+                <form action="{% url 'search' %}">
+                    <!-- 搜索框 -->
+                    <input type="text" name="kw" class="form-control" placeholder="搜索" autocomplete="off">
+                    <!-- 按钮 -->
+                    <button type="submit" class="btn btn-default ">
+                        <i class="iconfont icon-sousuo"></i>
+                    </button>
+                </form>
+            </div>
         </div>
-
     </nav>
 
     <!-- banner -->
