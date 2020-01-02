@@ -3,9 +3,10 @@
 
 html {
     scroll-behavior: smooth;
-    
 }
 body {
+    width: 100%; /* 设置不能滚动的解决！！！ */
+    
     background-color: rgb(231, 226, 226);
     font-family: "微软雅黑", freight-sans-pro, helvetica, sans-serif; 
     font-size: 16px;
@@ -215,7 +216,7 @@ body {
 
 /* 2. 横幅区 */
 .banner {
-    /* height: 100vh; */
+    /* height: 100vh; */  /* 浏览器不兼容 */
     transition: height .7s, opacity 1.4s;
 
     opacity: .7;
