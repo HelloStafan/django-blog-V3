@@ -13,7 +13,7 @@
 
 	<div class="article">
 
-		<!-- 页首 -->
+		<!-- 1. 页首 -->
 		<div class="header">
 			<h1 class="title">{{ post.title }}</h1>
 			<div class="info">
@@ -27,13 +27,13 @@
 			</div> 
 		</div>
 
-		<!-- 主体内容 -->
+		<!-- 2. 主体内容 -->
 		<div class="body">
 			<!-- 3.linebreaks ？？striptags -->
 			{{ post.body|safe}}
 		</div>
 
-		<!-- 页脚 -->
+		<!-- 3. 页脚 -->
 		<div class="footer">
 			{% include "../components/pagination_detail.html" with post=post before_post=before_post after_post=after_post %}
 		</div>

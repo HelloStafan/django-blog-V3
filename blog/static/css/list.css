@@ -1,30 +1,27 @@
 /* 列表模板 的样式 */
 @charset "utf-8";
 
-    /* 一个面板展示信息 */
-.panel-info {    /* 内部间隔 + 外边框 */
+/* 一个信息展示面板 */
+.panel-info {    
     margin-bottom: 20px;
     padding: 15px 20px;
     
     background-color: rgb(245, 240, 240);
-    /* 边框 + 阴影 */
+    /* 边框阴影 */
     border: 2px solid #ccc;
-    /* 阴影: 3种方案  */
     box-shadow: 0px 0px 5px #ccc;
-    /* box-shadow: 0px 0px 5px black; */
-    /* box-shadow: 20px 18px 18px #c3c3c3; */
 }
 .panel-info:hover {
     background-color: rgba(173,216,230,.5);
-    /* 透明的lightblue */
+    /* 即透明的lightblue */
 }
 
 
  /* 标题 */ 
 .panel-info .header {    /* 标题下边距 + 下边框 */
     padding-bottom: 15px;
-    border-bottom: 2px solid #ccc;
     margin-bottom: 10px;
+    border-bottom: 2px solid #ccc;
 }
 .panel-info .header .title  {  
     margin-bottom: 5px;   

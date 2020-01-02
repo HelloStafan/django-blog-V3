@@ -3,10 +3,7 @@
 	参数    
 			{{ before_post }} 上页页面对象
 			{{ after_post }}  下页页面对象
-
-
  -->
-
 <div class="pager">
 
 	<!-- 上一篇 -->
@@ -18,10 +15,6 @@
 	</a>
 	{% endfor %}
 	
-	<!-- 当前篇 -->
-	<!-- <span class="currnet">
-		共 {{ before_post.paginator.num_pages }} 篇
-	</span> -->
 
 	<!-- 下一篇 -->
 	{% for after_post in after_post %}
@@ -38,15 +31,16 @@
 		background-color: #ccc;
 		display: flex;
 		text-align: center;
-		font-size: 20px;
+		font-size: 1em;
 	}
 	.pager a {
 		/* 弹性项 即为block */
-		padding: 10px;  
+		padding: .5em;  
 		flex: 1;
 	}
 	.pager a:hover {
 		background-color: lightgoldenrodyellow;
+		
 	}
 
 </style>
