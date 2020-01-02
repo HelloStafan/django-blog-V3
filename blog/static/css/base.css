@@ -215,7 +215,7 @@ body {
 
 /* 2. 横幅区 */
 .banner {
-    height: 100vh;
+    /* height: 100vh; */
     transition: height .7s, opacity 1.4s;
 
     opacity: .7;
@@ -320,6 +320,9 @@ body {
     }
     .main > .content .pageTitle {
         margin-left: .5em;
+    }
+    .main > .content .pager {  
+        margin: 1em 0;
     }
     /* 以下消失: 有些不写在这里*/
     .sidebar {

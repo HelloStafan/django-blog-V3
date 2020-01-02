@@ -1,7 +1,10 @@
 
 $(function () {
 
-    // 首页的特殊样式
+    // 将首页的banner设为全屏
+    var screenHeight = window.innerHeight;
+    $(".banner").height(screenHeight);
+
     // 将首页一开始设为无法滚动
     $("body").css("overflow","hidden");
 
