@@ -235,7 +235,7 @@ body {
 .banner .intro {
     /* 可以用弹性布局 */
     position: absolute;
-    width: 240px;
+    width: 30%;
     height: 80px;
     top: 0;
     bottom: 0;
@@ -245,7 +245,7 @@ body {
 
     color: #fff;  
     text-align: center;
-    line-height: 40px;
+    line-height: 1.6em;
 }
 .banner .more {
     position: absolute;
@@ -271,8 +271,11 @@ body {
 .banner .more:hover {
     padding-bottom: 6px;
 }
-
-
+@media screen and (max-width:768px) {
+    .banner .intro {
+        width: 60%;
+    }
+}
 
 /* 3. main区 */
 /* 定义动画 多个关键帧 */

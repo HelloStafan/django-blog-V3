@@ -11,7 +11,22 @@ from blog.views import all_posts, all_tags, all_date, \
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
 
+import linecache
+import random
 # 定义一些零散的,全局的 视图  如  主页面
+
+def get_random_motto():
+    '''
+    随机获取一个语句
+    '''
+    # 文件路径
+    # 注意这里的路径,！！??
+    file_name = "./motto.txt" 
+    # 随机行数
+    line_number = random.randint(1,3);
+    print(line_number)
+    # 获取指定行数内容
+    return linecache.getline(file_name, line_number)
 
 
 # 主页面
@@ -20,7 +35,9 @@ def home(request):
     posts = paginate(all_posts, request.GET)
     # 获取页码范围
     page_range = get_page_range(posts)
-
+    # 获取随机语句
+    motto = get_random_motto()
+    print(motto)
     return render( request,
                   'home.html',
                   { # 列表信息
@@ -28,7 +45,9 @@ def home(request):
                    'page_range':page_range,
                     # 侧边栏信息    
                    'all_tags':all_tags,
-                   "all_date":all_date,})
+                   "all_date":all_date,
+                   'motto':motto,
+                   })
 
 
 

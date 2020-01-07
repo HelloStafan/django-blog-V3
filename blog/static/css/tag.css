@@ -1,6 +1,9 @@
 /* 分类页 content的样式 */
 @charset "utf-8";
 
+.sidebar {
+    display: none;
+}
 .main .content {
     width: 90%;
     margin: 0 auto;
