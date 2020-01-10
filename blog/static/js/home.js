@@ -29,12 +29,12 @@ $(function () {
         // $(".navbar").removeClass("navbar-light");
         // $(".navbar").addClass("navbar-dark");
         
-        // 2020/1/7 优化 ———— 显示隐藏
+        // 2020/1/7 优化 ———— 显示隐藏: 也是参考他人
         $(".navbar").toggle();
 
     })
-        
-    
+    console.log($("h1"))
+    $(".intro h1").slideDown(600);
 
   
     // 点击首页   还是直接刷新吧...

@@ -1,12 +1,12 @@
 /* 博客详情页 content的样式 */
 @charset "utf-8";
 /* 头部信息 */
-.article {
+.content {
     /* min-height: 800px; */
     flex: 3;
     padding: 0 5%;
 }
-.article .header {
+.content .header {
     background-color: rgb(245, 245, 245);
     border: 2px solid #ddd;
     border-bottom: none;
@@ -15,20 +15,20 @@
     margin: 0 -15px;
     box-shadow: 8px 11px 20px rgb(194, 180, 180);
 }
-.article .header .title {
+.content .header .title {
     margin: 10px 0;
     text-align: center;
 }
-.article .header .info .time {
+.content .header .info .time {
     margin-right: 10px;
 }
-.article .header .info .tags  {
+.content .header .info .tags  {
     margin: 10px 0 ;
 }
 
 
 /* 主体内容 */
-.article .body {
+.content .body {
     min-height: 500px;
     padding: 25px;
 
@@ -37,10 +37,10 @@
 }
 
 @media screen and (max-width:768px) {
-    .article {
+    .content {
         padding: 0 10px;
     } 
-    .article .body {
+    .content .body {
         padding-bottom: 0;
     }
 }

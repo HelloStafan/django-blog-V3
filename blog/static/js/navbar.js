@@ -24,7 +24,8 @@ $(function () {
 
     // 导航栏的媒体查询
     $(".navbar-toggle").click(function() {
-        $(".navbar-collapse").slideToggle(400);
         // jquery的预设动画
+        $(".navbar-collapse").slideToggle(400);
+        
     })
 })

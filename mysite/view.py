@@ -24,7 +24,6 @@ def get_random_motto():
     file_name = "./motto.txt" 
     # 随机行数
     line_number = random.randint(1,3);
-    print(line_number)
     # 获取指定行数内容
     return linecache.getline(file_name, line_number)
 
@@ -37,7 +36,7 @@ def home(request):
     page_range = get_page_range(posts)
     # 获取随机语句
     motto = get_random_motto()
-    print(motto)
+
     return render( request,
                   'home.html',
                   { # 列表信息
