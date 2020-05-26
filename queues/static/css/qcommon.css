@@ -1,0 +1,57 @@
+@charset "utf-8";
+/* 浮动样式 */
+.float-left {
+    float: left;
+}
+.float-right {
+    float: right;
+}
+.clearfix::after{
+    content: "";
+    display: block;
+    clear: both;
+}
+/* 固定样式 */
+.fixed {
+    position: fixed;
+    z-index: 10;
+}
+
+
+/* 以下样式 多个页面共有 */
+/* ~common-header区域  ------------------------------------------ */
+.common-header {
+    top: 0;
+    width: 100%;
+
+    background-color: #fff;
+    border-bottom: 1px solid #cccccc;
+}
+/* 登录按钮 */
+.common-header .btn-login {
+    background: none;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 6px 14px;
+
+    font-size: 14px;
+    font-weight: 400;
+    color: #333333;
+
+    margin: 10px 10px; 
+}
+.common-header .btn-login:hover {
+    color: rgba(0, 0, 0, 0.5);
+    background: #dbdada;
+}
+
+/* ~面包屑 ----------------------------- */
+.bread-tab {
+    width: 100%;
+    background-color: #F8F8F8;
+    font-size: 14px;
+    line-height: 40px;
+    padding-left: 8%;
+
+    top: 54px;
+}

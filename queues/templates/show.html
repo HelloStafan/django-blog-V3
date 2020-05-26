@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/iconfont.css' %}">
+        <link rel="stylesheet" href="{% static 'css/qreset.css' %}">
+        <link rel="stylesheet" href="{% static 'css/qcommon.css' %}">
+        <link rel="stylesheet" href="{% static 'css/show.css' %}">
+        <script src="{% static 'js/cal_chess_board.js' %}"></script>
+        <script src="{% static 'js/place_queue.js' %}"></script>
+    </head>
+
+    <body>
+    <div class="app">
+
+<!-- ~左边框 ------------------------------------------------->
+        <div class="left-box">
+            <!-- 标题 -->
+            <div class="title">
+               {{ num }}  皇后 
+            </div>
+
+            <!-- 放置方式的前10种 -->
+            {% for res in result %}
+                <div class="item">
+                    {% if forloop.first %}
+                        共 {{ res }} 种放置方式
+                    {% else %}
+                        <span>Way {{ forloop.counter0 }}：</span>
+                        <p class="way">{{ res }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %} 
+        </div>
+
+   
+<!-- ~皇后 ------------------------------------------------->
+        <div class="queue-box">
+            {% for i in range_num %}
+                <img class="queue" src="{% static 'img/queue.png' %}" alt="">
+            {% endfor %}
+        </div>
+
+
+<!-- ~棋盘 ------------------------------------------------->
+        <div class="chess_board">
+            <ul>
+                {% for i in range_num %}
+                    {% for i in range_num %}
+                        <li class="float-left"></li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div> 
+
+    </div>  
+
+    <script>
+        // 获取
+        var itemBtns = document.getElementsByClassName("item")
+        var ways = document.getElementsByClassName("way")
+        var queues = document.getElementsByClassName("queue")
+        console.log(itemBtns)
+
+        // 为所有的方式项 注册事件
+        for(let i = 0; i < itemBtns.length-1; i++) { 
+            // 不包括第一个item：共 5 种放置方式
+            itemBtns[i+1].onclick = function () {
+                // 预处理 对应的数组 
+                array_way = ways[i].innerText.replace("[","").replace("]","").split(",")
+                // 将数组中的移动距离值取出，并移动
+                for(let j = 0;j < array_way.length; j++) {
+                    liang = parseInt(array_way[j]) * 70 + 65
+                    queues[j].style.transform = "translate(" + liang + "px)"
+                }
+
+            }
+        }
+
+    </script>
+
+    </body>
+</html>

@@ -1,0 +1,77 @@
+@charset "utf-8";
+body {
+    background-color: rgb(238,238,238);
+    
+}
+
+.app {
+    display: flex;
+}
+
+/* ~左边框 --------------------------------------------------------- */
+.left-box {
+    /* 宽度 */
+    width: 280px;
+    /* 样式 */
+    background-color: rgb(250,250,250);
+    box-shadow: 0px 0 9px 5px rgba(0,0,0,0.09804);
+    font-size: 18px;
+}
+.left-box div {
+    padding: 10px;
+}
+.left-box .title {
+    text-align: center;
+    font-size: 36px;
+}
+.left-box .back-btn {
+    font-size: 30px;
+    float: left;
+}
+
+
+.left-box p {
+    text-align: center;
+    font-size: 18px;
+}
+
+/* 激活项 和 悬浮项 的样式 */
+.left-box .item:hover,
+.left-box .item.active {
+    background-color: rgb(238,238,238);
+    color: rgb(36, 128, 219);
+    cursor: pointer;
+}
+
+
+/* ~皇后 ----------------------------------------------- */
+.queue-box {
+    margin-top: 100px ;
+    margin-left: 100px;
+}
+.queue {
+    display: block;
+    width: 60px;
+    height: 60px;
+    /* 皇后之间的上下边距 */
+    margin-bottom: 11px;
+    /* 移动过渡 */
+    transition: transform .7s ease-out;
+}
+
+
+/* ~棋盘 ----------------------------------------------- */
+
+.chess_board {
+    margin: 100px 0;
+
+    background-color: lightgray;
+    box-shadow: 0px 0 9px 5px rgba(0,0,0,0.13804);
+}
+.chess_board li {
+    height: 70px;
+    width: 70px;
+    border: 1px solid rgb(153, 151, 151);
+    /* 下面这句很重要 */
+    box-sizing: border-box;
+}

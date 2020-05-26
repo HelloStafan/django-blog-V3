@@ -1,0 +1,32 @@
+@charset "utf-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+em,i {
+    font-style: normal
+}
+li {
+    list-style: none
+}
+img {
+    border: 0;
+    vertical-align: middle
+}
+button {
+    cursor: pointer;
+}
+a {
+    text-decoration: none;
+    cursor: pointer;
+    color: #333;
+}
+input {
+    background:none;  
+    outline:none;  
+    border: none;
+}
+input[type="submit"] {
+    cursor: pointer;
+}
+

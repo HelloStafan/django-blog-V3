@@ -1,0 +1,24 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <link rel="stylesheet" href="{% static 'css/qindex.css' %}">
+        <link rel="stylesheet" href="{% static 'css/qreset.css' %}">
+       
+    </head>
+
+    <body>
+        <!-- 蒙版：添加阴影 -->
+        <div class="mask"></div>
+        <!-- 表单 →  queues函数 -->
+        <div class="app">
+            <form action="{% url 'queues' %}">
+            几  <input type="text" name="num" autocomplete="off">  皇后？
+            </form>
+        </div>
+    
+    </body>
+    
+</html>
