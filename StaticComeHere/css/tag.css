@@ -1,29 +1,28 @@
 /* 分类页 content的样式 */
 @charset "utf-8";
 
-.main .content {
-    width: 90%;
-    margin: 0 auto;
+.sidebar {
+    display: none;
 }
+
 img {
     opacity: .8;
 }
+
 .tag-list {
     display: flex;
+    flex-wrap: wrap;
+    font-size: 10px;  /* 方便计算 */
     /* justify-content: space-between; */
-
 }
 .tag-list .tag-item {
     flex: 1;
     flex-basis: 25%;
 
-    margin-right: 30px;
-    margin-bottom: 30px;
+    margin: 0 .8em 24px;
 
-    /* min-height: 180px; */
-    max-width: 330px;
-    height: 180px;
-
+    max-width: 26em;
+    height: 15em;
 }
 /* 面板区 */
 .tag-item .panel-info {
@@ -62,7 +61,7 @@ img {
 
 .panel-info .big .title {   /* 标题 */
     color: #fff;         /* 颜色 */
-    font-size: 28px;       /* 字体 */
+    font-size: 3em;       /* 字体 */
 
     margin-bottom: 8px;
 }
@@ -101,8 +100,8 @@ img {
     color: #fff;
     background-color: rgba(255, 193, 7 , .8);
     text-align: center;
-    line-height: 88px;
-    font-size: 20px;
+    line-height: 4em;
+    font-size: 2.2em;
     font-weight: 900;
 }
 
@@ -124,4 +123,21 @@ img {
 /* 2.0交互形式：蒙版移动*/
 .panel-info a:hover {
     opacity: 0;
+}
+
+@media screen and (max-width:768px) {
+    .tag-list {
+        padding: 0 10px;
+    } 
+    /* 调整一个tag的高度，因为宽度变窄了 */
+    .tag-list .tag-item {
+        height: 10em;
+    }
+    .panel-info .big .title {
+        font-size: 1.8em;
+    }
+    .panel-info .small .thumbnail span {
+        font-size: 1.4em;
+        line-height: 4em;
+    }
 }

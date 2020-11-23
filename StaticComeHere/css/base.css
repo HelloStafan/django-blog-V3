@@ -5,16 +5,22 @@ html {
     scroll-behavior: smooth;
 }
 body {
-    /* min-height: 1200px; */
-    overflow: hidden;
+    width: 100%; /* 无法设置为无法滚动的解决！！！ */
+    
     background-color: rgb(231, 226, 226);
     font-family: "微软雅黑", freight-sans-pro, helvetica, sans-serif; 
+    font-size: 16px;
 }
+
 
 /* a标签样式 ———— 各区域不同 */
     /* 导航栏 */
-.nav a:hover {
-    color: rgb(226, 226, 177);
+.navbar a:hover,
+.navbar li.active a {
+    color: #ea6f5a;
+}
+.navbar .navbar-logo a:hover {
+    color: black;
 }
     /* 标签 */
 .tags a {       
@@ -26,84 +32,104 @@ body {
 
 
 /* 1. 导航区 */
-.nav {
+.navbar {
+    display: flex;
     height: 50px;
-    background-color: rgba(82, 132, 175, 0.7);
-    /* 渐变颜色 */
-    /* background-image: linear-gradient(to bottom,); */
+    transition: transform .3s;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 5px #888;
 }
-
-.nav-fixed-top {
+/* 导航栏 固定位置的类名 */
+.navbar-fixed-top {
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 2;
 }
-    /* 1. logo区 */
-.nav .nav-logo a{
-    display: block;
+/* 导航栏 专属动态行为的类名 ———— 向上隐藏 */
+.navbar-slide-up {
+    transform: translateY(-100%);
+}
+/* 导航栏 专属背景的类名 */
+.navbar-transparent {
+    background-color: transparent;
+}
+   
+
+    /* logo区 */
+.navbar .navbar-logo {
+    display: inline-block;
+}
+.navbar .navbar-logo a {
+    display: inline-block;
     line-height: 20px;
     padding: 15px;
 }
-    /* 2. li区 */
-.nav .nav-list {
-    float: left;
-    font-size: 16px;
+    /* 交替按钮 */
+.navbar-toggle {
+    float: right;  /* 靠右 */
+    margin-right: 1.2em;
+    display: none;    
 }
-.nav .nav-list li {
-    float: left;
+.navbar-toggle i {
+    color: #666;
+    line-height: 50px; 
+    font-size: 20px;
+    padding: 3px 14px;
+    border: 1px solid #cecece;
+    border-radius: 2px;
 }
-.nav .nav-list li a{
+
+
+/* 坍塌区 */
+@media screen and (min-width:768px) {
+    .navbar-collapse {
+        display: flex!important;  /* 为了覆写内联样式 */
+        flex: 1;
+        justify-content: space-between;
+    }
+}
+
+/* list区 */
+.navbar .navbar-list {
+    display: flex;
+}
+.navbar .navbar-list li a {
     display: block;
     line-height: 20px;
     padding: 15px;
 }
 /* 二级菜单 */
-.nav .nav-list .dropdown {
+.navbar .navbar-list .dropdown {
     position: relative;
-}  
-.nav .dropdown .nav-sub-list {
+}
+.navbar .dropdown .navbar-sub-list {
+    width: 285px;
     position: absolute;   /* 定位 */
     top: 0px;
     left: 120px; 
 
-    width: 285px;
-
+    
     opacity: 0;
     transition: opacity 1s, left .5s;
 }
-.nav .dropdown .nav-sub-list li {
-    float: left;
+.navbar .dropdown .navbar-sub-list li {
+    display: inline-block;
 }
-
 /* 动态 */
-/* 激活的一级菜单 */
-.nav .nav-list li.active {
-    background-color: #fff;
-}
-.nav .nav-list li.active a {
-    color: #555;
-}
 /* 一级菜单激活二级菜单 */
-.nav .dropdown:hover .nav-sub-list{
+.navbar .dropdown:hover .navbar-sub-list{
     opacity: 1;
     left: 90px;
 }
-/* 二级菜单鼠标经过 */
-.nav .dropdown .nav-sub-list li:hover {
-    background-color: #fff;
-}
-.nav .dropdown .nav-sub-list li:hover a {
-    color: #555;
-}
 
     /* 3. 搜索框 */
-.nav .nav-search {
+.navbar .navbar-search {
     height: 100%;
     margin-right: 30px;
     position: relative;
 }
-.nav .nav-search .form-control{
+.navbar .navbar-search .form-control{
     width: 150px;
     height: 30px;
     padding: 0 40px 0 20px;
@@ -117,35 +143,91 @@ body {
 
     transition: width .5s;
 }
-.nav .nav-search .btn{
+.navbar .navbar-search .btn{
     position: absolute;  /* 定位 */
-    top: 28%;
+    top: 26%;
     right: 2%;  
 
     border-radius: 50%;   /* 样式：大小*/
     height: 25px;
     width: 25px;
 }
-.nav .nav-search .form-control:focus{
+.navbar .navbar-search .form-control:focus{
     width: 240px;
     outline: none;
 }
-.nav .nav-search .form-control:focus + .btn{
+.navbar .navbar-search .form-control:focus + .btn{
     background-color: #969696;
     color: #fff;
 }
 
+/* 在小屏幕时*/
+@media screen and (max-width:768px)  {
+    .navbar {
+        display: block;  /* 为了让brand独占一行，将list挤下去 */
+    }
+    /* 默认行向排列，小屏幕时都为列向排列 */
+    .navbar-collapse,
+    .navbar-list {
+        flex-direction: column;
+    }
+    /* 坍塌区消失 */
+    .navbar-collapse {
+        text-align: center;
+        background-color: #fff;
+
+        display: none;
+    }
+    /* 交替按钮出现 */
+    .navbar-toggle {
+        display: inline-block;
+    }
+    /* 二级菜单不要了 */
+    .navbar-sub-list {
+        display: none;
+    }
+    /* 表单占满 */
+    .navbar .navbar-search {
+        padding-bottom: 12px;
+        padding-left: 12px;
+    }
+    .navbar .navbar-search .form-control,
+    .navbar .navbar-search .form-control:focus {
+        width: 100%;
+    }
+
+    /* 重置激活项的样式 */
+    .navbar .navbar-list li:hover {
+        background-color: rgb(245,245,245);
+    }
+    .navbar .navbar-list li {
+        border-bottom: 1px solid #f0f0f0;
+    }
+    .navbar .navbar-list li.active a {
+        color: #ea6f5a;
+    }
+    .navbar .navbar-list li.active:hover a {
+        color: #ea6f5a;
+    }
+    .navbar .navbar-list li:hover a {
+        color: #333;
+    }
+}
+
+
 
 /* 2. 横幅区 */
 .banner {
-    height: 100vh;
+    /* height: 100vh; */  /* 浏览器不兼容 */
     transition: height .7s, opacity 1.4s;
 
+    font-family: 'Playball',cursive;
     opacity: .7;
     background: url(../img/banner2.jpeg) no-repeat fixed; 
     background-size: 100% 100%;
 
     position: relative;
+    
 }
 .banner::after {  /* 伪元素蒙版 */
     content: "";
@@ -157,7 +239,7 @@ body {
 .banner .intro {
     /* 可以用弹性布局 */
     position: absolute;
-    width: 240px;
+    width: 45%;
     height: 80px;
     top: 0;
     bottom: 0;
@@ -167,7 +249,13 @@ body {
 
     color: #fff;  
     text-align: center;
-    line-height: 40px;
+    line-height: 1.6em;
+    /* 字体阴影 */
+    text-shadow: 0 3px 6px rgba(0,0,0,.5);
+}
+.banner .title{
+    margin-bottom: 0.5em;
+    font-size: 2.5em;
 }
 .banner .more {
     position: absolute;
@@ -193,8 +281,11 @@ body {
 .banner .more:hover {
     padding-bottom: 6px;
 }
-
-
+@media screen and (max-width:768px) {
+    .banner .intro {
+        width: 60%;
+    }
+}
 
 /* 3. main区 */
 /* 定义动画 多个关键帧 */
@@ -210,31 +301,59 @@ body {
 }
 .main {  
     display: flex;  
-    /* 定位元素  sidebar会有影响吗？？？？？？ */
     padding-left: 40px;
-    padding-top: 60px;
+    padding-top: 60px;  /* 这个防止被遮盖，什么时候都要的 */
     
     animation: animate-slide-in-down .5s;
 }
 /* content区 */
 /* 整体 */
+.main > .content .pageTitle { 
+    margin-bottom: .5em;
+    font-weight: lighter;  
+}
 .main > .content {  
     flex: 4;
-    min-height: 800px;
-    padding: 0 40px;
+    /* 设置最小高度 */
+    min-height: 600px; 
+    padding: 0 5%;
     transition: margin .5s;
 }
-.main > .content .pageTitle { 
-    margin-bottom: 20px;
+
+/* 在小屏幕时*/
+@media screen and (max-width:768px) {
+    /* 调整各个距离 */
+    .main {
+        display: block;
+        padding-left: 0;
+    }
+    .main > .content {  
+        padding: 0;
+    }
+    .main > .content .panel-info {
+        margin-bottom: 0;
+        border: 1px solid #ccc;
+    }
+    .main > .content .pageTitle {
+        margin-left: .5em;
+    }
+    .main > .content .pager {  
+        margin: 1em 0;
+    }
+    
 }
+
 
 
 
 /* 4. footer */
 /* 加body选择器，防止改变别的元素的样式 */
 body > .footer {
-    height: 60px;
-    background-color: #848484;
+    margin-top: 10px;
+    padding: 20px;
+    background-color: #EFEAEE;
+    text-align: center;
+    font-size: 15px;
 }
 
 
@@ -242,20 +361,55 @@ body > .footer {
 .board {
     flex: 1;
     margin-right: 20px;
-    margin-top: 72px;
+    margin-top: 36px;
+
+    font-size: 14px;
 }
-.board .header {
-    /* width: 100%; */
+.board .newest-box,
+.board .hottest-box {
+    min-height: 100px;
+    padding: 6px;
+}
+.board .title {
     height: 2em;
-    background-color: lightskyblue;
-
-    border: 3px solid #ccc;
-
-    margin-bottom: 5px;
-    padding: 20px 20px 0 20px;
-    text-align: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 3px;
+    padding: 20px 20px 0 0;
+    font-size: 18px;
 }
-.board .body {
-    height: 200px;
-    background-color: #fff;
+.board .item {
+    margin-bottom: 2px;
+    padding: 4px;
+}
+
+/* 公告栏 在小屏幕时*/
+@media screen and (max-width:768px) {
+   
+    /* 以下消失: 有些不写在这里*/
+    .sidebar {
+        display: none;
+    }
+    .board {
+        display: black;
+        float: none;
+
+        font-size: 16px;
+        margin-right: 0;
+    }
+    .board .title {
+        border-bottom: 2px solid #ccc;
+    }
+    .board .item-list{
+        border: .5px solid #ccc;
+        margin-top: 20px;
+        background-color: rgba(249, 251, 256,0.5);
+        border-radius: 6px;
+        padding: 20px;
+    }
+    .board .item {
+        margin-bottom: 0;
+        padding: 10px;
+        padding-left: 0;
+        border-bottom: .5px solid #ccc;  
+    }
 }

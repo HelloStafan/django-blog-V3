@@ -1,16 +1,24 @@
+/* 自定义文件 */
+.codehilite {
+	background-color: rgb(41,43,53);
+	border-radius: 4px;
+	padding: 5px 15px 5px 15px;
+	font-weight: bold;
+	font-family:  "Fira Code"；
+}
 .codehilite .hll { background-color: #222222 }
-.codehilite .c { color: #000080 } /* Comment */
-.codehilite .err { color: #cccccc; border: 1px solid #FF0000 } /* Error */
+.codehilite .c {  color: #676e95; } /* Comment */
+.codehilite .err { color: #ececec; border: 1px solid #FF0000 } /* Error */
 .codehilite .g { color: #cccccc } /* Generic */
-.codehilite .k { color: #cdcd00 } /* Keyword */
+.codehilite .k { color: #aa5500 } /* Keyword */
 .codehilite .l { color: #cccccc } /* Literal */
 .codehilite .n { color: #cccccc } /* Name */
 .codehilite .o { color: #3399cc } /* Operator */
 .codehilite .x { color: #cccccc } /* Other */
-.codehilite .p { color: #cccccc } /* Punctuation */
-.codehilite .cm { color: #000080 } /* Comment.Multiline */
-.codehilite .cp { color: #000080 } /* Comment.Preproc */
-.codehilite .c1 { color: #000080 } /* Comment.Single */
+.codehilite .p { color: #FFCB00} /* Punctuation 标点 */
+.codehilite .cm { color: #676e95} /* Comment.Multiline */
+.codehilite .cp { color: #676e95} /* Comment.Preproc */
+.codehilite .c1 { color: #676e95} /* Comment.Single */
 .codehilite .cs { color: #cd0000; font-weight: bold } /* Comment.Special */
 .codehilite .gd { color: #cd0000 } /* Generic.Deleted */
 .codehilite .ge { color: #cccccc; font-style: italic } /* Generic.Emph */
@@ -23,11 +31,11 @@
 .codehilite .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
 .codehilite .gt { color: #0040D0 } /* Generic.Traceback */
 .codehilite .kc { color: #cdcd00 } /* Keyword.Constant */
-.codehilite .kd { color: #00cd00 } /* Keyword.Declaration */
+.codehilite .kd { color: #c792ea} /* Keyword.Declaration */
 .codehilite .kn { color: #cd00cd } /* Keyword.Namespace */
 .codehilite .kp { color: #cdcd00 } /* Keyword.Pseudo */
 .codehilite .kr { color: #cdcd00 } /* Keyword.Reserved */
-.codehilite .kt { color: #00cd00 } /* Keyword.Type */
+.codehilite .kt { color: #c792ea} /* Keyword.Type */
 .codehilite .ld { color: #cccccc } /* Literal.Date */
 .codehilite .m { color: #cd00cd } /* Literal.Number */
 .codehilite .s { color: #cd0000 } /* Literal.String */
@@ -41,7 +49,7 @@
 .codehilite .nf { color: #cccccc } /* Name.Function */
 .codehilite .nl { color: #cccccc } /* Name.Label */
 .codehilite .nn { color: #cccccc } /* Name.Namespace */
-.codehilite .nx { color: #cccccc } /* Name.Other */
+.codehilite .nx { color: #82aaff} /* Name.Other */
 .codehilite .py { color: #cccccc } /* Name.Property */
 .codehilite .nt { color: #cccccc } /* Name.Tag */
 .codehilite .nv { color: #00cdcd } /* Name.Variable */

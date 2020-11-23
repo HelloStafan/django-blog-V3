@@ -1,46 +1,60 @@
 /* 列表模板 的样式 */
 @charset "utf-8";
-/* 颜色方案 */
-/*   color: #fff;
-     background-color: #337ab7;
-     color: #00abff;
-     color: lightseagreen;
-*/
 
-    /* 一个面板展示信息 */
-.panel-info {    /* 内部间隔 + 外边框 */
+/* loading图片 居中 */
+.post-list img {
+    display: block;
+    margin: 0 auto;
+}
+
+/* 一个信息展示面板 */
+.panel-info {    
     margin-bottom: 20px;
     padding: 15px 20px;
     
     background-color: rgb(245, 240, 240);
-    /* 边框 + 阴影 */
+    /* 边框阴影 */
     border: 2px solid #ccc;
-    /* 阴影: 3种  */
-    /* box-shadow: 0px 0px 5px black; */
-    /* box-shadow: 0px 0px 5px #ccc; */
-    box-shadow: 20px 18px 18px #c3c3c3;
+    box-shadow: 0px 0px 5px #ccc;
 }
-.panel-info .header {  /* 总体字体 */
-    font-size: 18px;
-}
-.panel-info .footer {
-    font-size: 16px;
-}
-
-.panel-info .header .title {  /* 标题下边距 + 下边框 */
-    padding-bottom: 15px;
-    border-bottom: 2px solid #ccc;
-
-    margin-bottom: 10px;
-}
-.panel-info .footer div {       
-    display: inline;
-}
-
-.panel-info:hover{
+.panel-info:hover {
     background-color: rgba(173,216,230,.5);
-    /* 透明的lightblue */
+    /* 即透明的lightblue */
 }
+
+
+ /* 标题 */ 
+.panel-info .header {    /* 标题下边距 + 下边框 */
+    padding-bottom: 15px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ccc;
+}
+.panel-info .header .title  {  
+    margin-bottom: 5px;   
+    font-weight: lighter;
+}
+.panel-info .header .sub-title { 
+    color: rgba(0, 0, 0, .5);
+}
+.panel-info .header .icon {
+    border-radius: 50%;
+}
+.panel-info .header .icon img{
+    width: 40px;
+    height: 40px;
+}
+
+
+
+
+.panel-info .footer {
+    font-size: 0.8em;
+    display: flex;
+}
+.panel-info .footer .time {
+    margin-right: 2em;
+}
+
 
 
 

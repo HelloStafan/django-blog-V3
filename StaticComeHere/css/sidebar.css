@@ -3,6 +3,7 @@
     宽度由父级设定百分比,子级继承;
     高度由子级撑开，利用a元素的行高和字体以及ul的min-height  
  */
+
 /* 1. check区 */
 #check {
     display: none;
@@ -140,5 +141,5 @@ label #close {
     cursor: pointer;
 }
 .slide-btn.active ~ .content {
-    min-height: 100px;  /* 设置最小高度使content不会因为内容过少为变小 */
+    min-height: 130px;  /* 设置最小高度使content不会因为内容过少为变小 */
 }
