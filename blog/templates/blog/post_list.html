@@ -1,16 +1,19 @@
 <!-- 该模板仅作为 post_list_by_date/tag 的原型，不再跳转-->
 
 {% extends "base.html" %}
+<!-- 子模板中需要添加 load static -->
+{% load static %}
 
 <!-- 标题块 -->
-{% block title %}博客|HelloStafen{% endblock %}
+{% block title %}笔记|HelloStafen{% endblock %}
 <!-- 激活块：-->
-{% block nav_博客_active %}active{% endblock %}
+{% block nav_笔记_active %}active{% endblock %}
 
 
 {% block content %}
-
+	
 	<div class="content">
+		
 		<h1 class="pageTitle">
 			{% block pageTitle %} My Blog {% endblock %}
 		</h1>

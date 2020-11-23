@@ -11,7 +11,7 @@ urlpatterns = [
     path('tag/<slug:tag_slug>/', views.post_list_by_tag, name='post_list_by_tag'),
 
     # 1.3 请求参数(str:date) => 帖子列表(date)
-    path('<int:year>/<int:month>', views.post_list_by_date, name='post_list_by_date'),
+    path('time/<int:year>/<int:month>', views.post_list_by_date, name='post_list_by_date'),
 
     # 2.请求参数(/tag) => 标签列表(所有)
     path('tag', views.tag_list, name='tag_list'),
@@ -22,5 +22,8 @@ urlpatterns = [
          views.post_detail,
          name='post_detail'
          ),
+    
+    path('getPost',views.getPost),
+    path('thumbUp',views.thumbUp),
 
 ]

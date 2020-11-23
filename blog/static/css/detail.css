@@ -29,11 +29,48 @@
 
 /* 主体内容 */
 .content .body {
+    /* 优化文章显示效果 */
+    line-height: 2em;
+    
     min-height: 500px;
     padding: 25px;
 
-    background-color: rgba(241, 235, 235, 0.8);
-    border: 2px solid #ddd;    
+    /*background-color: rgba(241, 235, 235, 0.8);*/
+    /*border: 2px solid #ddd;    */
+}
+#thumbs-box {
+    /* 位置 */
+    bottom: 20%;
+    right: 19%;
+    cursor: pointer;
+
+    text-align: center;
+}
+#thumbs-up-btn {
+    /* 圆形 */
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    box-shadow: 0 2px 10px rgba(0,0,0,.05);
+    background-color: #fff;
+    color: orange;
+    
+    /* 居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#thumbs-up-btn i {
+    font-size: 25px;
+}
+#thumbs-up-btn:hover {
+    background-color: orange;
+    color: #fff;
+}
+#thumbs-up-btn.active {
+    background-color: orange;
+    color: #fff;
 }
 
 @media screen and (max-width:768px) {
@@ -42,5 +79,11 @@
     } 
     .content .body {
         padding-bottom: 0;
+    }
+    #thumbs-box {
+        position: static;
+    }
+    #thumbs-box #thumbs-up-btn{
+        margin: 0 auto;
     }
 }

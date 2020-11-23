@@ -1,5 +1,6 @@
 from django.shortcuts import render  # 快捷方式：渲染
 from django.shortcuts import get_object_or_404  # 快捷方式：查询对象
+from django.http import HttpResponse
 
 # 分页相关
 from django.core.paginator import Paginator, EmptyPage, \
@@ -7,11 +8,13 @@ from django.core.paginator import Paginator, EmptyPage, \
 
 # 相关模型
 from .models import Post
+from util.redis_util import RedisUtil  # redis工具类
 from taggit.models import Tag  # 该app中的内置Tag模型
 
-from markdown import markdown
+from markdown import markdown  # 渲染md
 from datetime import datetime
 
+import json
 
 # 定义一些函数
 def paginate(objs, res_parm, num=7):
@@ -24,57 +27,6 @@ def paginate(objs, res_parm, num=7):
     page = res_parm.get('page')  # 从get请求中获取页数参数
     Pageobj = paginator.get_page(page)  # 分页器获取  页面对象
     return Pageobj
-
-def get_page_range(Pageobj):
-    '''
-    获取页数的范围，用于展现的优化; 
-        参数: 页面对象
-        返回: 数量范围的列表
-    '''
-     # 3.优化显示 
-    current_page = Pageobj.number;  # 当前页数
-    max_page = Pageobj.paginator.num_pages;  # 总页数 
-    
-    page_range = list(range(max(current_page-2,1),min(current_page+2,max_page)+1))
-    return page_range
-
-def get_tags_with_count(tags):
-    '''
-    获取各个标签对应的数量;
-        参数: Tag对象集合
-        返回: Tag对象组成的列表，列表以数量逆序
-    '''
-    # ★获取标签对应帖子的数量(猴子补丁)
-    for tag in tags:    # 注意  管理器的运用！
-        tag.posts_count = Post.published.filter(tags=tag).count()
-
-    # 按标签 对应帖子数量 排序
-    tag_list = list(all_tags)   
-    tags = sorted(tag_list, key=lambda x: x.posts_count, reverse=True)
-    return tags
-
-def get_date_with_count(posts):
-    '''
-    获取各个日期对应的数量;
-        参数: 帖子对象集合
-        返回: 字典 键为日期对象，值为对应的数量;
-    '''
-    all_date = {}
-    for post in posts:
-        # 获取 该帖子的时间
-        y =  post.publish.year
-        m = post.publish.month
-
-        # 创建 时间字符串 
-        # date = "%s年%s月"%(y,m)
-        
-        # 也可以创建 日期对象
-        date_obj = datetime(y,m,1);
-        # 获取 该时间的帖子数量    publish.year不可以吗？？
-        
-        all_date[date_obj] = Post.published.filter(publish__year=y,
-                                                    publish__month=m).count()
-    return all_date
 
 def prettify_md(post):
     '''
@@ -93,27 +45,19 @@ def prettify_md(post):
 all_tags = Tag.objects.all()  # 所有标签
 all_posts = Post.published.all()  # 所有帖子
 
-all_tags = get_tags_with_count(all_tags)
-all_date = get_date_with_count(all_posts)
-
+redis_util = RedisUtil() 
 
 # 1.1 帖子列表(all)
 def post_list(request):
     
     # 分页
     posts = paginate(all_posts, request.GET)
-    # 获取页码范围
-    page_range = get_page_range(posts)
 
     return render(request,
                   'blog/post_list.html',
                   { 
                     # 列表信息
                    'posts': posts,  
-                   'page_range': page_range,  
-                    # 侧边栏信息    
-                   'all_tags': all_tags,
-                   "all_date": all_date,
                    }) 
 
 # 1.2 帖子列表(tag)
@@ -126,8 +70,6 @@ def post_list_by_tag(request, tag_slug):
 
     # 分页
     posts = paginate(posts, request.GET)
-    # 获取页码范围
-    page_range = get_page_range(posts)
 
     return render(request,
                   "blog/post_list_by_tag.html",
@@ -136,10 +78,6 @@ def post_list_by_tag(request, tag_slug):
                    'tag':tag,
                     # 列表信息
                    'posts':posts,
-                   'page_range':page_range,
-                    # 侧边栏信息    
-                   'all_tags':all_tags,
-                   "all_date":all_date,
                   })
 
 # 1.3 帖子列表(date)
@@ -150,8 +88,6 @@ def post_list_by_date(request, year, month):
 
     # 分页
     posts = paginate(posts, request.GET)
-    # 获取页面范围
-    page_range = get_page_range(posts)
 
     date = str(year) + "年" + str(month) + "月"
 
@@ -162,12 +98,7 @@ def post_list_by_date(request, year, month):
                    'date':date,
                     # 列表信息
                    'posts':posts,
-                   'page_range':page_range,
-                    # 侧边栏信息    
-                   'all_tags':all_tags,
-                   "all_date":all_date,
                   })
-
 
 # 2. 帖子详情
 def post_detail(request, year, month, day, title):
@@ -180,34 +111,92 @@ def post_detail(request, year, month, day, title):
                              title=title,
                                  )
     prettify_md(post)
-    print(post)
+    # print(post)
+
     # 获取当前post的页数     
     paginator = Paginator(all_posts, 1)
 
     all_posts_list = list(all_posts)
     page = all_posts_list.index(post) + 1   
     
-
     # 获取上/下一篇     不是数字，返回第一页;数字不对，最后一页
     before_post = paginator.get_page(page + 1)
     after_post = paginator.get_page(page - 1)
 
+    # 1. 阅读量增加
+    # 这个方法会初始化阅读数，然后增加阅读量
+    # 浮点数更改
+    # 2. 点赞数获取
+    num_of_reading = int(redis_util.incr_num_of_reading(post.id))
+    num_of_thumbs = int(redis_util.get_num_of_thumbs(post.id))
+
     return render(request,
                   "blog/detail.html",
-                  {'post':post,  # 当前帖子对象
+                  {'post':post,  # 当前帖子对象,
+                   'num_of_reading':num_of_reading,
+                   'num_of_thumbs':num_of_thumbs,
                    'before_post': before_post,  # 前一个帖子对象
                    'after_post': after_post,  # 后一个帖子对象
-                   # 侧边栏信息    
-                   'all_tags': all_tags,
-                   "all_date": all_date,
                    })
 
-
-# 4.分类列表
+# 3. 分类列表
 def tag_list(request,):
+    return render(request, "blog/tag.html", {})
 
-    tags = get_tags_with_count(all_tags)
-    return render(request,
-                  "blog/tag.html",
-                  {'tags':tags,
-                   })
+# AJAX
+def getPost(request):
+
+    # 1. 获取参数 
+    page = int(request.GET.get('page'))
+    tag = request.GET.get('tag')
+    year = request.GET.get('year')
+    month = request.GET.get('month')
+
+    # 2. 根据参数tag,time的有无，获取帖子
+    posts = Post.published.all()
+    if tag != 'undefined':
+        tag = get_object_or_404(Tag, slug=tag)
+        posts = Post.published.all().filter(tags__in=[tag])
+    elif year != 'undefined':
+        posts = Post.published.all().filter(publish__year=year, publish__month=month)
+    
+    # 2. 根据参数page，截取帖子(每次7条)
+    request_posts = posts[(page-1)*7:page*7-1]  # 注意切片机制
+    if not request_posts:  # 如果 是空的，直接返回
+        return HttpResponse('[]')
+
+    # 3. 处理帖子信息
+    # querySet.values() → 一个字典列表
+    resquest_posts_info = request_posts.values()
+
+    # 循环需要处理的数据
+    # 1. 时间 → 字符串 2. tag信息 3. post的详情url
+
+    i = 0  # 需要一个索引
+    for post_info in resquest_posts_info:
+        post_info['publish'] = post_info['publish'].strftime('%Y-%m-%d %H:%M')
+
+        post_info['url'] = request_posts[i].get_absolute_url()  
+
+        # 根据索引，循环Post对象，获取其所有tag
+        tags = []
+        for tag in request_posts[i].tags.all():
+            tags.append(str(tag))
+        # 将tag字符串添加进字典
+        post_info['tags'] = tags  
+        i += 1
+
+    return HttpResponse(json.dumps(list(resquest_posts_info))) 
+    
+def thumbUp(request):
+
+    # 是否是点赞
+    flag = request.GET.get('flag')
+    post_id = request.GET.get('postId') 
+
+    if flag == "true":
+        now_thumbs = redis_util.incr_num_of_thumbs(post_id, 1)    
+    else:
+        now_thumbs = redis_util.incr_num_of_thumbs(post_id, -1)    
+   
+    return HttpResponse(json.dumps({"now_thumbs": now_thumbs}))

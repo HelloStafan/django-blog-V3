@@ -10,32 +10,35 @@
 <div class="pager">
 
 	<ul>
-		<!-- 若有上页 -->
-		{% if posts.has_previous %}
-		<li class="previous">
-			<a href="?page={{ posts.previous_page_number }}&kw={{search_keyword}}">
-				<i class="iconfont icon-shangyiyecu"></i>
-			</a>
+		<!-- 上页 -->
+		<li id="previous" >
+			<i class="iconfont icon-shangyiyecu"></i>
 		</li>
-		{% endif %}
 
 		<!-- 页码列表 -->
-		{% for page in page_range %}
-			{% if page == posts.number %}
-				<li class="active"><a class="active" href="#">{{page}}</a></li>
-			{% else %}
-				<li><a href="?page={{page}}&kw={{search_keyword}}">{{page}}</a></li>
-			{% endif %}
-		{% endfor %}
+		<input id="btn" value="1"/>
+		
 
-		<!-- 若有下页 -->
-		{%  if posts.has_next %}
-		<li class="next">
-			<a href="?page={{ posts.next_page_number }}&kw={{search_keyword}}">
-				<i class="iconfont icon-xiayiyecu"></i>
-			</a>
+		<!-- 下页 -->
+		<li id="next" value="2"  >
+			<i class="iconfont icon-xiayiyecu"></i>
 		</li>
-		{% endif %}
+
+		<!-- {% for page in page_range %}
+			{% if page == posts.number %}
+				<li class="active" page="{{ page }} ">
+					<a class="active" href="#">
+						{{page}}
+					</a>
+				</li>
+			{% else %}
+				<li page="{{ page }}">
+					<a href="#">{{page}}
+					</a>
+				</li>
+			{% endif %}
+		{% endfor %} -->
+	
   </ul>
 
 </div>
@@ -47,42 +50,31 @@
 		text-align: center;    /* 整体居中 */
 		margin-bottom: 50px;
 	}
-	.pager li {
+	.pager li,
+	.pager input{
 		display: inline-block;  /* li并排显示 */
 		line-height: 20px;      /* 内部文字居中 */
 		text-align: center;
+		font-size: 20px;
 
 		margin: 0 2px;         /* li之间的间隔 */
+		cursor: pointer;
 	}
-	/* 除了上/下页 : 基本圆形按钮*/
-	.pager li:not(.previous):not(.next) a {
-		display: inline-block;   /* 圆形按钮 */
-		height: 20px;
+	/* 圆形按钮 */
+	.pager input {
+		/* 圆形按钮 */
+		height: 20px;   
 		width: 20px;
 		border-radius: 50%;
 		padding: 10px;
-		
-		color: #848c96;
 		border: 1px solid #cdd1d4;
-	}
-	/* 除了上/下页 和 激活页 : 鼠标经过和边框色一致*/
-	.pager li:not(.previous):not(.next):not(.active) a:hover {
-		background-color: #cdd1d4;
+
+		background-color: #5e72e4;
+		color: white;
+
+		cursor: text;
 	}
 
-	/* 激活页 */
-	.pager li.active a.active {   /* 增加css优先级,以覆盖上面定义的a颜色 */
-		color: #fff;
-		background-color: #5e72e4;
-	}
-	/* 上/下页：图标字体 */
-	.pager li span {
-		font-size: 32px;
-		vertical-align:middle;
-	}
-	.pager li span:hover {
-		color: #bdc2c7;
-	}
 </style>
 
 

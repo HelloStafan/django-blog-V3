@@ -141,5 +141,5 @@ label #close {
     cursor: pointer;
 }
 .slide-btn.active ~ .content {
-    min-height: 100px;  /* 设置最小高度使content不会因为内容过少为变小 */
+    min-height: 130px;  /* 设置最小高度使content不会因为内容过少为变小 */
 }

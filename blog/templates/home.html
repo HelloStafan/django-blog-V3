@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load static %}
 <!-- 标题块 -->
 {% block title %}主页|HelloStafen{% endblock %}
 
@@ -12,8 +12,9 @@
 	<div class="banner">
 		<!-- 标语 -->
 		<div class="intro">
-			<h1 style="margin-bottom:12px;">Hello_stefan</h1>
-			<p> {{ motto }} </p>
+			<h1 class="title">Hello_stefan</h1>
+			<p id="content"> {{ motto.famous_saying }} </p>
+			<p id="author" style="text-align: right"> ——  {{ motto.famous_name }}  </p>
 		</div>
 		<!-- 更多 -->
 		<div class="more">
@@ -27,6 +28,7 @@
 <!-- 内容块 -->
 {% block content %}
 	<div class="content">
+
 		<h1 class="pageTitle">
 			{% block pageTitle %} My Blog {% endblock %}
 		</h1>
@@ -36,10 +38,7 @@
 		<script src="../static/js/home.js"></script>
 		<!-- 直接引入静态文件,模板引入好像不行 -->
 	</div>	
-	<style>	
-		/* 首页的导航栏样式：需要弄一下 */
 	
-	</style>
 {% endblock %}
 
 

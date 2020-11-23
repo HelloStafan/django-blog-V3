@@ -5,22 +5,35 @@ from django.shortcuts import render
 
 from django.db.models import Q  # Q 复杂搜索
 from blog.models import Post
-from blog.views import all_posts, all_tags, all_date, \
-                        paginate, get_page_range
+from blog.views import all_posts, paginate
 
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
 
 import linecache
 import random
+
+import json
+import requests
+
 # 定义一些零散的,全局的 视图  如  主页面
 
-def get_random_motto():
+# 从API中获取
+def get_mottos():
+    url = "http://api.avatardata.cn/MingRenMingYan/LookUp?key=be8ea9f5676647d79f1639278c6973f8&keyword=我&rows=100"
+    res = requests.get(url)
+    motto_info_list = json.loads(res.text)['result']
+
+    who = random.randint(1,50);
+    return motto_info_list[who]
+
+# 从文件中获取(该函数暂时不用)
+def pick_motto_by_random():
     '''
     随机获取一个语句
     '''
     # 文件路径
-    # 注意这里的路径,！！??
+    # 注意这里的路径,！！？？
     file_name = "./motto.txt" 
     # 随机行数
     line_number = random.randint(1,3);
@@ -32,32 +45,28 @@ def get_random_motto():
 def home(request):
     # 分页
     posts = paginate(all_posts, request.GET)
-    # 获取页码范围
-    page_range = get_page_range(posts)
-    # 获取随机语句
-    motto = get_random_motto()
+
+    # 获取随机名言
+    motto = get_mottos()
 
     return render( request,
                   'home.html',
                   { # 列表信息
                    'posts':posts,
-                   'page_range':page_range,
-                    # 侧边栏信息    
-                   'all_tags':all_tags,
-                   "all_date":all_date,
                    'motto':motto,
                    })
 
 
-
 # ★搜索页面
 def search(request):
-    search_keyword = request.GET.get('kw', '').strip()  # 从表单中 获取对应请求(为get请求)的kw参数
+    # 从表单中 获取对应请求(为get请求)的kw参数
+    search_keyword = request.GET.get('kw', '').strip()  
 
     # Step-3.分词机制
     condition = None
 
-    for word in search_keyword.split(' '):  # 因为 分词要split，所以之前先 strip删除无效字符
+    # 因为 分词要split，所以之前先 strip删除无效字符
+    for word in search_keyword.split(' '):  
         if condition is None:
             condition = Q(title__icontains=word)  # contains——部分匹配；i——不区分大小写
         else:
@@ -68,15 +77,12 @@ def search(request):
 
     # Step-2.分页机制
     posts = paginate(search_posts, request.GET)
-
-    # Step-3 优化显示 ———— 获取页码范围
-    page_range = get_page_range(posts)
     
     return render(request,
                   'blog/search.html',  
                   {
                    'search_keyword': search_keyword,
                    'posts': posts,  # 分页后的 帖子
-                   'page_range':page_range,
                    })
+
 

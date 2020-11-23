@@ -3,7 +3,7 @@
 <!-- 标题块 -->
 {% block title %}分类{% endblock %}
 <!-- 激活块 -->
-{% block nav_分类_active %}active{% endblock %}
+{% block nav_文集_active %}active{% endblock %}
 
 <!-- 内容块 分类列表-->
 {% block content %}
@@ -11,40 +11,47 @@
 	<!-- {% load static %} -->
 	<link href="{% static 'css/tag.css' %}" rel="stylesheet">
 
-	<div class="tag-list clearfix">
-		{% for tag in tags %}
-		<div class="tag-item">
+	<div class="content">
 
-			<div class="panel-info">
-				<!-- 超链接 -->
-				<a href="{% url 'blog:post_list_by_tag' tag.slug %}"></a>
+		<h1 class="pageTitle">
+			{% block pageTitle %} 文集 {% endblock %}
+		</h1>
 
-				<!-- 大图 -->
-				<div class="big">   <!-- 蒙版背景 --> 
-					<div class="title"> <!-- 标题 -->
-						{{ tag }}
+		<div class="tag-list clearfix">
+			{% for tag in all_tags %}
+			<div class="tag-item">
+
+				<div class="panel-info">
+					<!-- 超链接 -->
+					<a href="{% url 'blog:post_list_by_tag' tag.slug %}"></a>
+
+					<!-- 大图 -->
+					<div class="big">   <!-- 蒙版背景 --> 
+						<div class="title"> <!-- 标题 -->
+							{{ tag }}
+						</div>
+						<div class="line">  <!-- 标题下滑线 -->
+						</div>
 					</div>
-					<div class="line">  <!-- 标题下滑线 -->
+					<!-- 小图 -->
+					<div class="small">
+						<div class="thumbnail">
+							<!-- 最初 我为什么要采用这种方式引入图片？ -->
+							<!-- 即写死的相对路径: -->
+							<!-- <img src="/static/img/nail2.jpg"> -->
+							<img src="{% static 'img/nail2.jpg' %}">
+						</div>
+						<div class="thumbnail">
+							<!-- <img src="/static/img/nail2.jpg"> -->
+							<img src="{% static 'img/nail1.jpg' %}">
+							<span> + {{ tag.posts_count }}</span>
+						</div>
 					</div>
 				</div>
-				<!-- 小图 -->
-				<div class="small">
-					<div class="thumbnail">
-						<!-- 最初 我为什么要采用这种方式引入图片？ -->
-						<!-- 即写死的相对路径: -->
-						<!-- <img src="/static/img/nail2.jpg"> -->
-						<img src="{% static 'img/nail2.jpg' %}">
-					</div>
-					<div class="thumbnail">
-						<!-- <img src="/static/img/nail2.jpg"> -->
-						<img src="{% static 'img/nail1.jpg' %}">
-						<span> + {{ tag.posts_count }}</span>
-					</div>
-				</div>
+
 			</div>
-
+			{% endfor %}
 		</div>
-		{% endfor %}
 	</div>
 	
 {% endblock %}

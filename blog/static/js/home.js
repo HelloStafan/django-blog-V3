@@ -1,4 +1,4 @@
-
+// 加载首页的一些初始化操作
 $(function () {
 
     // 将首页的banner设为全屏
@@ -33,7 +33,7 @@ $(function () {
         $(".navbar").toggle();
 
     })
-    console.log($("h1"))
+
     $(".intro h1").slideDown(600);
 
   
@@ -55,4 +55,28 @@ $(function () {
     // 不行，还是会清空，因为浏览器刷新，整个文档都清空了
     // ↓
     // 解决:  见本文件最上面
+
+
+    // -------------------------------分割线------------------------------
+    // 2020-11-22  上面的又些话，现在不是很懂..
+    
+    // 随机名言
+    // $.ajax({
+    //         url: 'http://api.tianapi.com/txapi/dictum/index?key=842e2879d61b783983a938399257fe72&num=1',
+    //         type:'get',
+    //         async: true,
+    //         xhrFields: {
+    //             withCredentials: true
+    //         },
+    //         crossDomain: true,
+    //         success : function(data) {    
+    //             console.log(typeof data)
+
+    //             // 将json数据转化为js对象
+    //             var motto = JSON.parse(data)
+    //             console.log(data)
+    //             document.getElementById('content').innerText = motto.content
+    //             document.getElementById('author').innerText = motto.author
+    //         },
+    //     });
 })

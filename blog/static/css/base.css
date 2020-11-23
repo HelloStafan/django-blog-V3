@@ -12,9 +12,11 @@ body {
     font-size: 16px;
 }
 
+
 /* a标签样式 ———— 各区域不同 */
     /* 导航栏 */
-.navbar a:hover {
+.navbar a:hover,
+.navbar li.active a {
     color: #ea6f5a;
 }
 .navbar .navbar-logo a:hover {
@@ -219,11 +221,13 @@ body {
     /* height: 100vh; */  /* 浏览器不兼容 */
     transition: height .7s, opacity 1.4s;
 
+    font-family: 'Playball',cursive;
     opacity: .7;
     background: url(../img/banner2.jpeg) no-repeat fixed; 
     background-size: 100% 100%;
 
     position: relative;
+    
 }
 .banner::after {  /* 伪元素蒙版 */
     content: "";
@@ -235,7 +239,7 @@ body {
 .banner .intro {
     /* 可以用弹性布局 */
     position: absolute;
-    width: 30%;
+    width: 45%;
     height: 80px;
     top: 0;
     bottom: 0;
@@ -246,6 +250,12 @@ body {
     color: #fff;  
     text-align: center;
     line-height: 1.6em;
+    /* 字体阴影 */
+    text-shadow: 0 3px 6px rgba(0,0,0,.5);
+}
+.banner .title{
+    margin-bottom: 0.5em;
+    font-size: 2.5em;
 }
 .banner .more {
     position: absolute;
@@ -300,10 +310,12 @@ body {
 /* 整体 */
 .main > .content .pageTitle { 
     margin-bottom: .5em;
+    font-weight: lighter;  
 }
 .main > .content {  
     flex: 4;
-    /* min-height: 800px; */
+    /* 设置最小高度 */
+    min-height: 600px; 
     padding: 0 5%;
     transition: margin .5s;
 }
@@ -328,13 +340,6 @@ body {
     .main > .content .pager {  
         margin: 1em 0;
     }
-    /* 以下消失: 有些不写在这里*/
-    .sidebar {
-        display: none;
-    }
-    .board {
-        display: none;
-    }
     
 }
 
@@ -344,9 +349,11 @@ body {
 /* 4. footer */
 /* 加body选择器，防止改变别的元素的样式 */
 body > .footer {
-    height: 60px;
     margin-top: 10px;
-    background-color: #848484;
+    padding: 20px;
+    background-color: #EFEAEE;
+    text-align: center;
+    font-size: 15px;
 }
 
 
@@ -354,20 +361,55 @@ body > .footer {
 .board {
     flex: 1;
     margin-right: 20px;
-    margin-top: 72px;
+    margin-top: 36px;
+
+    font-size: 14px;
 }
-.board .header {
-    /* width: 100%; */
+.board .newest-box,
+.board .hottest-box {
+    min-height: 100px;
+    padding: 6px;
+}
+.board .title {
     height: 2em;
-    background-color: lightskyblue;
-
-    border: 3px solid #ccc;
-
-    margin-bottom: 5px;
-    padding: 20px 20px 0 20px;
-    text-align: center;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 3px;
+    padding: 20px 20px 0 0;
+    font-size: 18px;
 }
-.board .body {
-    height: 200px;
-    background-color: #fff;
+.board .item {
+    margin-bottom: 2px;
+    padding: 4px;
+}
+
+/* 公告栏 在小屏幕时*/
+@media screen and (max-width:768px) {
+   
+    /* 以下消失: 有些不写在这里*/
+    .sidebar {
+        display: none;
+    }
+    .board {
+        display: black;
+        float: none;
+
+        font-size: 16px;
+        margin-right: 0;
+    }
+    .board .title {
+        border-bottom: 2px solid #ccc;
+    }
+    .board .item-list{
+        border: .5px solid #ccc;
+        margin-top: 20px;
+        background-color: rgba(249, 251, 256,0.5);
+        border-radius: 6px;
+        padding: 20px;
+    }
+    .board .item {
+        margin-bottom: 0;
+        padding: 10px;
+        padding-left: 0;
+        border-bottom: .5px solid #ccc;  
+    }
 }

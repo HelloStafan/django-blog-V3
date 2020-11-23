@@ -8,25 +8,42 @@
 <!-- 内容块 帖子列表(搜索到的)-->
 {% block content %}
 
-	<div class="wrapper">
+	<div class="content">
 	
-		<h1 class="title"> 搜索 {{ search_keyword }} , 共搜到{{posts.paginator.count}}个结果 </h1>
+		<h1 class="pageTitle"> 
+			搜索标题包含 
+			<span  class="kw">{{ search_keyword }}</span> 的文章
+			({{ posts.paginator.count }} 个结果)
+		</h1>
 
 		{% include "../components/list.html" with posts=posts %}
 
 	</div>
-
-	<!-- 该页面特殊的样式, 为了使list这一模板独立 -->
 	<style>
-		/* list包裹器 */
-		.wrapper { 
-			padding: 0 40px;
+		.kw {
+			color: orange;
 		}
-		/* 标题 */
-		.content .wrapper>.title {   
-			margin-bottom: 30px;
+	</style>
+	<script >
+		// 搜索的关键词高亮显示
+		turnLight()
+		function turnLight() {
+
+			// 构建关键词的html
+			var kw = document.getElementsByClassName("kw")[0].innerText
+			var kwHtml = "<span class='kw'>"+ kw +"</span>"
+
+			// 获取标题
+			var titles = document.getElementsByClassName("post-list")[0].getElementsByClassName("title")
+
+			// 循环获取每个标题下的a标签文本，替换成kwHtml
+			for (var i = 0; i < titles.length; i++) {
+				let a = titles[i].getElementsByTagName("a")[0]
+				a.innerHTML = a.innerHTML.replace(kw, kwHtml)
+			}
 		}
-		</style>
+
+	</script>
 {% endblock %}
 
 

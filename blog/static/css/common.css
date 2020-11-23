@@ -14,6 +14,9 @@
 .right {
     float: right;
 }
+.fixed {
+	position: fixed;
+}
 
 
 
