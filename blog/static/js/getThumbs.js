@@ -7,14 +7,14 @@ $(function() {
 		var postId = document.getElementById("post-id").value
 		
 		document.getElementById('thumbs-up-btn').onclick = function() {
-			if (this.classList.contains("active")) {
+			if (this.className == "active") {
 				// 发送ajax(取消点赞)
 				thumbUp(postId, false)
-				this.classList.remove("active")
+				this.className = ""
 			}else{
 				// 发送ajax(点赞)
 				thumbUp(postId, true)
-				this.classList.add("active")
+				this.className = "active"
 			}
 			
 		}	

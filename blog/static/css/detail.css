@@ -1,5 +1,6 @@
 /* 博客详情页 content的样式 */
 @charset "utf-8";
+
 /* 头部信息 */
 .content {
     /* min-height: 800px; */
@@ -29,6 +30,7 @@
 
 /* 主体内容 */
 .content .body {
+
     /* 优化文章显示效果 */
     line-height: 2em;
     
@@ -38,6 +40,11 @@
     /*background-color: rgba(241, 235, 235, 0.8);*/
     /*border: 2px solid #ddd;    */
 }
+/* 文章的list需要标号 */
+.content .body li {
+    list-style: decimal; 
+}
+
 #thumbs-box {
     /* 位置 */
     bottom: 20%;
