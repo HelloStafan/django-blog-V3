@@ -82,6 +82,7 @@
     }
     #thumbs-box {
         position: static;
+        display: inline-block;
     }
     #thumbs-box #thumbs-up-btn{
         margin: 0 auto;
