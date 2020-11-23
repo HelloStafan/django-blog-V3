@@ -8,7 +8,7 @@ $(function() {
 
 	// 加载loading效果
 	function loading() {
-		var html = '<img src="http://127.0.0.1:8000/static/img/loading.gif"></img>'
+		var html = '<img src="/static/img/loading.gif" />'
         $(".post-list").html(html);
 	}	
 	// 根据参数：现在页，更新 前/现在/后 3个按钮的值
