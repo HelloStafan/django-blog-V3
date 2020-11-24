@@ -71,9 +71,9 @@
 #thumbs-up-btn i {
     font-size: 25px;
 }
-#thumbs-up-btn:hover {
-    background-color: orange;
-    color: #fff;
+#thumbs-up-btn  {
+    background-color: #fff;
+    color: orange;
 }
 #thumbs-up-btn.active {
     background-color: orange;
@@ -94,4 +94,6 @@
     #thumbs-box #thumbs-up-btn{
         margin: 0 auto;
     }
+
+
 }
