@@ -15,16 +15,25 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path  # 为view配置url
-from django.urls import include  # 将某个app中的所有url配置导入
+from django.urls import include  
+'''
+    注意下面三者的关系
+    include('login.urls....   login必须是一个模块
+    namespace='login'         
+    urls文件中的app_name 
+'''
+
 from . import view
 from queues import views
 
+app_name = 'home'  
 
 urlpatterns = [
     path('', view.home, name='home'),  # 主页
     path('search/', view.search, name='search' ),  # 搜索页 这里的search/ 无关紧要 可随便定义
     path('admin/', admin.site.urls),  # 默认的管理站点路由
     path('blog/', include('blog.urls', namespace='blog')),
+    path('user/', include('loginn.urls', namespace='login')),
     path('queues/', views.show, name="queues"),
 ]
     # 当直接输入网址来发起请求时,urlpatterns进行匹配'blog'并进行跳转

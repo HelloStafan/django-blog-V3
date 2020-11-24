@@ -35,16 +35,40 @@
 			{{ post.body|safe}}
 		</div>
 
-		<!-- 点赞区 -->
-		<div id="thumbs-box" class="fixed">
-			<div id="thumbs-up-btn">
-				<!-- 点赞图标 -->
-				<i class="iconfont icon-dianzan"></i>
-				<!-- 点赞的帖子id -->
-				<input id="post-id" value="{{ post.id }}" type="hidden" />
+		<div class="fixed " id="little-btn-box">
+			<!-- 点赞区 -->
+			<div class="thumbs-box-wrapper">
+				<div id="thumbs-box" >
+					<div id="thumbs-up-btn" class="{{ thumb_class_btn }}">
+						<!-- 点赞图标 -->
+						<i class="iconfont icon-dianzan"></i>
+						<!-- 点赞的帖子id -->
+						<input id="post-id" value="{{ post.id }}" type="hidden" />
+						<!-- 用户id -->
+						<input id="user" value="{{ request.session.userid }}" type="hidden" />
+					</div>
+
+					<div id="thumbs-num-area">{{ num_of_thumbs }}  赞</div>
+				</div>
 			</div>
-			<div id="thumbs-num-area">{{ num_of_thumbs }}</div>
+			<!-- 收藏区 -->
+			<div class="thumbs-box-wrapper">
+				<div id="collect-box" >
+					<div id="collect-up-btn" class="{{ collect_class_btn }}">
+						<!-- 点赞图标 -->
+						<i class="iconfont icon-shoucang"></i>
+						<!-- 点赞的帖子id -->
+						<input id="post-id" value="{{ post.id }}" type="hidden" />
+						<!-- 用户id -->
+						<input id="user" value="{{ request.session.userid }}" type="hidden" />
+					</div>
+
+					<div id="collect-num-area">{{ num_of_collects }}  收藏</div>
+				</div>
+			</div>		
 		</div>
+		
+
 
 		<!-- 3. 页脚 -->
 		<div class="footer">

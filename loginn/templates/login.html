@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="zh-hans" >
+<head>
+<title>登录</title>
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="robots" content="NONE,NOARCHIVE">
+</head>
+	
+    <link href="{% static 'admin/css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/login.css' %}" rel="stylesheet">
+    <link href="{% static 'admin/css/responsive.css' %}" rel="stylesheet">
+
+<body class=" login"
+  data-admin-utc-offset="28800">
+
+<!-- Container -->
+<div id="container">
+
+    
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+			<h1 id="site-name">
+				<a href="/user?dowhat=login">登录</a> /
+				<a href="/user?dowhat=register">注册</a>
+			</h1>
+        </div>
+        
+    </div>
+    <!-- END Header -->
+    
+	<div id="msg-box">{{ msg }}</div>
+
+    <!-- Content -->
+
+    <div id="content" class="colM">
+        <div id="content-main">
+			<form action="/user/login" method="post" id="login-form">
+				<input type="hidden" name="csrfmiddlewaretoken" value="l85SDsGmBBeB9tHbb51dGaxCVqbHu1TNhQCBp6Pm32YQiA2BBjzathHJ0rbQ5T67">
+				{% csrf_token %}
+				<div class="form-row">
+				    <label class="required" for="id_username">
+				    	用户名:
+				    </label> 
+				    <input type="text" name="username" autofocus required id="id_username">
+			  	</div>
+		  		<div class="form-row">
+				    <label class="required" for="id_password">
+				    	密码:
+				    </label> 
+				    <input type="password" name="password" required id="id_password">
+		  		</div>
+		  
+		  		<div class="submit-row">
+			    	<label>&nbsp;</label>
+			    	<input type="submit" value="登录">
+			  	</div>
+			</form>
+		</div>
+
+        <br class="clear">
+    </div>
+    <!-- END Content -->
+
+
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
+        
+       
+<style >
+	#msg-box {
+		text-align: center;
+		color: red;
+		font-size: 15px;
+		background-color: #ffc;
+
+		box-sizing: border-box;
+		line-height: 3em;
+	}
+	input[type="submit"] {
+		background-color: #417690;
+	}
+
+</style>
+
+
+
+</body>
+</html>

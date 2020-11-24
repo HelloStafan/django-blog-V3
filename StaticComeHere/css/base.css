@@ -160,6 +160,14 @@ body {
     background-color: #969696;
     color: #fff;
 }
+.navbar .navbar-user {
+    top: 60px;
+    right: 0;
+    padding: 10px;
+    border: 1px solid #ccc; 
+    cursor: pointer;
+}
+
 
 /* 在小屏幕时*/
 @media screen and (max-width:768px)  {

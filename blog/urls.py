@@ -22,8 +22,12 @@ urlpatterns = [
          views.post_detail,
          name='post_detail'
          ),
-    
-    path('getPost',views.getPost),
-    path('thumbUp',views.thumbUp),
 
+    # AJAX
+    path('getPost', views.getPost),
+    path('thumbUp', views.thumbUp),
+    path('collect', views.collect),
+    # 我的点赞、收藏
+    path('ilike', views.get_all_posts_user_like, name="ilike"),
+    path('icolletc', views.get_all_posts_user_colletc, name="icolletc"),
 ]

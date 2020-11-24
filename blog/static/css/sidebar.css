@@ -70,16 +70,21 @@ label #close {
     background: #fff;
 
 }
-.Bydate, .Bytag {
+.sidebar-item {
     background-color: #fff;
     padding: 7px 10px 0 26px;  /* 这个配比比较合理  */
     box-shadow: 0px 0px 20px 7px #ccc;
 }
+/* ”我的" 区域 不用很大 (和别的区域的不同)*/
+.sidebar-item.my .slide-btn.active ~ .content {
+    min-height: 80px;  
+    font-size: 16px;
+}
+
 /* 内部 */
     /* 标题-整体 */
     /* 作为标题的样式。故而选择器为title */
-.Bydate .title, 
-.Bytag .title {
+.sidebar-item .title {
     color: #a19f9f;
     border-bottom: 1px solid #e7e7e7;   
     padding-bottom: 8px;
@@ -106,8 +111,7 @@ label #close {
     bottom: 0;   
 }
     /* 内容区-整体 */
-.Bydate .content, 
-.Bytag .content {
+.sidebar-item .content {
     overflow: hidden;  /* 之前已经溢出了!! 没有设置 */
     font-size: 0.9em;
     line-height: 1.5;
@@ -118,8 +122,7 @@ label #close {
     transition: min-height .4s;
 }
     /* 内容区-内部 */
-.Bydate .content li a, 
-.Bytag .content li a {
+.sidebar-item .content li a{
     display: inline-block;   /* a填充li,设置可点击范围 */
     /* height: 100%; */     /* 高度子级撑开,所以不用设置 */
     width: 100%;
@@ -129,8 +132,7 @@ label #close {
     box-sizing: border-box;
 }
     /* 内部 动态效果 */
-.Bydate .content li a:hover, 
-.Bytag .content li a:hover {
+.sidebar-item .content li a:hover{
     padding-left: 8px;
     border-radius: 20px;
     background-color: rgba(0,0,0,.08);

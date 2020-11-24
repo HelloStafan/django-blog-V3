@@ -1,7 +1,7 @@
-from django.shortcuts import render  # 快捷方式：渲染
+from django.shortcuts import render,redirect # 快捷方式：渲染
 from django.shortcuts import get_object_or_404  # 快捷方式：查询对象
 from django.http import HttpResponse
-
+from django.http import HttpResponseRedirect  
 # 分页相关
 from django.core.paginator import Paginator, EmptyPage, \
     PageNotAnInteger
@@ -127,14 +127,34 @@ def post_detail(request, year, month, day, title):
     # 这个方法会初始化阅读数，然后增加阅读量
     # 浮点数更改
     # 2. 点赞数获取
+    # 3. 判断已登录用户是否点赞过该文章
     num_of_reading = int(redis_util.incr_num_of_reading(post.id))
+
     num_of_thumbs = int(redis_util.get_num_of_thumbs(post.id))
+    num_of_collects = int(redis_util.get_num_of_collect(post.id))
+
+    has_thumbed = False
+    has_collected = False
+
+    user_id = request.session.get("userid")
+
+    if user_id:
+        has_thumbed = redis_util.has_thumbed(post.id, user_id)
+        has_collected = redis_util.has_collected(post.id, user_id)
+
+    # 获取前端对应类的激活状态 
+    thumb_class_btn = "active" if has_thumbed else ""
+    collect_class_btn = "active" if has_collected else ""
 
     return render(request,
                   "blog/detail.html",
                   {'post':post,  # 当前帖子对象,
                    'num_of_reading':num_of_reading,
                    'num_of_thumbs':num_of_thumbs,
+                   "num_of_collects": num_of_collects,
+                   'thumb_class_btn': thumb_class_btn,
+                   'collect_class_btn': collect_class_btn,
+
                    'before_post': before_post,  # 前一个帖子对象
                    'after_post': after_post,  # 后一个帖子对象
                    })
@@ -190,13 +210,87 @@ def getPost(request):
     
 def thumbUp(request):
 
+    # 判断用户未登录  →  放到客户端上判断  应该是ajax的原因，无法跳转
+    # return render(request, "login.html", {"msg": "请登录！"})
+
+    user_id = request.session.get("userid")
+
     # 是否是点赞
     flag = request.GET.get('flag')
     post_id = request.GET.get('postId') 
 
     if flag == "true":
-        now_thumbs = redis_util.incr_num_of_thumbs(post_id, 1)    
+        redis_util.incr_num_of_thumbs(post_id, user_id) 
+        redis_util.incr_post_user_like(post_id, user_id) 
     else:
-        now_thumbs = redis_util.incr_num_of_thumbs(post_id, -1)    
-   
+        redis_util.decr_num_of_thumbs(post_id, user_id)
+        redis_util.decr_post_user_like(post_id, user_id)   
+
+    now_thumbs = redis_util.get_num_of_thumbs(post_id)
+
     return HttpResponse(json.dumps({"now_thumbs": now_thumbs}))
+
+def collect(request):
+
+    user_id = request.session.get("userid")
+
+    # 是否是收藏
+    flag = request.GET.get('flag')
+    post_id = request.GET.get('postId') 
+
+    if flag == "true":
+        redis_util.incr_num_of_collect(post_id, user_id) 
+        redis_util.incr_post_user_collect(post_id, user_id) 
+    else:
+        redis_util.decr_num_of_collect(post_id, user_id)
+        redis_util.decr_post_user_collect(post_id, user_id)   
+
+    now_collects = redis_util.get_num_of_collect(post_id)
+
+    return HttpResponse(json.dumps({"now_collects": now_collects}))
+
+def get_all_posts_user_like(request):
+
+    user_id = request.session.get("userid")
+
+    all_posts_user_like = redis_util.get_all_posts_user_like(user_id)
+    
+    # 循环，根据每个文章id获取文章对象
+    posts = [] 
+    for post_id in all_posts_user_like:
+        # 从redis读取的，需要解码
+        post_id = post_id.decode()
+        # 获取文章
+        post = Post.published.filter(id=post_id)[0]
+        # 添加到列表
+        posts.append(post)
+
+    sorted_posts = sorted(posts, key=lambda x:x.publish, reverse=True) 
+    return render(request, 
+                  "blog/post_list_user_like.html", 
+                  {
+                    "posts": sorted_posts,
+                  })
+
+def get_all_posts_user_colletc(request):
+
+    user_id = request.session.get("userid")
+
+    all_posts_user_collect = redis_util.get_all_posts_user_collect(user_id)
+    
+    # 循环，根据每个文章id获取文章对象
+    posts = [] 
+    for post_id in all_posts_user_collect:
+        # 从redis读取的，需要解码
+        post_id = post_id.decode()
+        # 获取文章
+        post = Post.published.filter(id=post_id)[0]
+        # 添加到列表
+        posts.append(post)
+
+    sorted_posts = sorted(posts, key=lambda x:x.publish, reverse=True) 
+    return render(request, 
+                  "blog/post_list_user_collect.html", 
+                  {
+                    "posts": sorted_posts,
+                  })

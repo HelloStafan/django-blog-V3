@@ -21,4 +21,13 @@ $(function () {
     $("#open").click(function () {
         content.css("margin-left", "10%");
     })
+
+    var content = $(".sidebar").has("#check").siblings(".content");
+
+    $("#close").click(function () {
+        content.css("margin-left", "0px")
+    })
+    $("#open").click(function () {
+        content.css("margin-left", "10%");
+    })
 })

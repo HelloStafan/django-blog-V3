@@ -26,14 +26,15 @@ $(function() {
 		var page = this.value
 
 		if (page > 0) {
+			$(window).scrollTop(0)
 			loading()
 			updateBtn(page)
 
-    		// 伪效果
+    		// 伪loading效果
     		var queryParas = getParas(page)
     		setTimeout(function () {
 		        getPostByAjax(queryParas)
-		    }, 500);
+		    }, 600);
 		}
 	}
 

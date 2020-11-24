@@ -45,18 +45,23 @@
     list-style: decimal; 
 }
 
-#thumbs-box {
-    /* 位置 */
-    bottom: 20%;
+
+/* 点赞区 */
+#little-btn-box {
+    bottom: 22%;
     right: 19%;
     cursor: pointer;
 
-    text-align: center;
+    text-align: center;  
 }
-#thumbs-up-btn {
+.thumbs-box-wrapper {
+    margin-bottom: 10px;
+}
+#thumbs-up-btn,
+#collect-up-btn {
     /* 圆形 */
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     box-shadow: 0 2px 10px rgba(0,0,0,.05);
     background-color: #fff;
@@ -65,21 +70,31 @@
     /* 居中 */
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;   
 }
-#thumbs-up-btn i {
-    font-size: 25px;
-}
-#thumbs-up-btn  {
+/* 字体图标 */
+#thumbs-up-btn {
     background-color: #fff;
     color: orange;
 }
-#thumbs-up-btn.active {
+#collect-up-btn {
+    background-color: #fff;
+    color: dodgerblue;
+}
+#thumbs-up-btn.active{
     background-color: orange;
     color: #fff;
 }
+#collect-up-btn.active {
+    background-color: dodgerblue;
+    color: #fff;
+}
+#thumbs-up-btn i,
+#collect-up-btn i {
+    font-size: 25px;
+}
 
+/* 小屏幕时 */
 @media screen and (max-width:768px) {
     .content {
         padding: 0 10px;
@@ -87,13 +102,18 @@
     .content .body {
         padding-bottom: 0;
     }
-    #thumbs-box {
+    /* 最外层的盒子 */
+    #little-btn-box {
         position: static;
+        display: flex;
+        justify-content: center;
+    }
+    .thumbs-box-wrapper {
+        text-align: center;
         display: inline-block;
+        padding: 30px;
     }
     #thumbs-box #thumbs-up-btn{
         margin: 0 auto;
     }
-
-
 }
