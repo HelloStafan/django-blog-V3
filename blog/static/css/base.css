@@ -19,7 +19,7 @@ body {
 /* a标签样式 ———— 各区域不同 */
     /* 导航栏 */
 .navbar a:hover,
-.navbar li.active a {
+.navbar li.active>a {
     color: #ea6f5a;
 }
 .navbar .navbar-logo a:hover {
@@ -107,23 +107,23 @@ body {
     position: relative;
 }
 .navbar .dropdown .navbar-sub-list {
-    width: 285px;
+    /*width: ;*/
     position: absolute;   /* 定位 */
-    top: 0px;
-    left: 120px; 
-
+    top: 50px;
+    left: 0; 
+    background-color: #transparent;
     
     opacity: 0;
-    transition: opacity 1s, left .5s;
-}
-.navbar .dropdown .navbar-sub-list li {
-    display: inline-block;
+    transition: opacity .5s;
 }
 /* 动态 */
 /* 一级菜单激活二级菜单 */
 .navbar .dropdown:hover .navbar-sub-list{
     opacity: 1;
-    left: 90px;
+}
+/* 我的  下拉菜单的字体调小*/
+#my-sub {
+    font-size: 13px;
 }
 
     /* 3. 搜索框 */
@@ -197,6 +197,20 @@ body {
     .navbar-sub-list {
         display: none;
     }
+    /* 我的二级菜单还是要显示*/
+    #my-sub {
+        display: block;
+        position: static;
+        height: 0;
+        opacity: 0;
+        transition: height .3s ,opacity .4s;  
+    }
+    #my:hover #my-sub{
+        height: 150px;
+        opacity: 1;
+    }
+    
+
     /* 表单占满 */
     .navbar .navbar-search {
         padding-bottom: 12px;
