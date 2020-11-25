@@ -19,7 +19,7 @@ import requests
 # 定义一些零散的,全局的 视图  如  主页面
 
 # 从API中获取
-def get_mottos():
+def get_motto_from_API():
     url = "http://api.avatardata.cn/MingRenMingYan/LookUp?key=be8ea9f5676647d79f1639278c6973f8&keyword=我&rows=100"
     res = requests.get(url)
     motto_info_list = json.loads(res.text)['result']
@@ -28,13 +28,13 @@ def get_mottos():
     return motto_info_list[who]
 
 # 从文件中获取(该函数暂时不用)
-def pick_motto_by_random():
+def get_motto_from_file():
     '''
     随机获取一个语句
     '''
     # 文件路径
-    # 注意这里的路径,！！？？
-    file_name = "./motto.txt" 
+    # 注意这里的路径,！
+    file_name = "./motto.txt"
     # 随机行数
     line_number = random.randint(1,3);
     # 获取指定行数内容
@@ -47,8 +47,12 @@ def home(request):
     posts = paginate(all_posts, request.GET)
 
     # 获取随机名言
-    motto = get_mottos()
-
+    try:
+        # 如果api失效了
+        motto = get_motto_from_API()
+    except KeyError:
+        motto = get_motto_from_file()
+        
     return render( request,
                   'home.html',
                   { # 列表信息
