@@ -71,7 +71,7 @@ $(function() {
             	var contentArea = document.getElementsByClassName('post-list')[0]
  
             	if (data == '[]') {
-            		contentArea.innerHTML = "<p>暂无内容</p>"
+            		contentArea.innerHTML = "<p>暂无更多文章</p>"
             	}else{
             		// 将json数据转化为js对象
 					var posts = JSON.parse(data)
