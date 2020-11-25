@@ -10,6 +10,9 @@ body {
     background-color: rgb(231, 226, 226);
     font-family: "微软雅黑", freight-sans-pro, helvetica, sans-serif; 
     font-size: 16px;
+
+    /* 取消蓝色背景 */
+    -webkit-tap-highlight-color: transparent;
 }
 
 
