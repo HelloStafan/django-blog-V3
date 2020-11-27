@@ -20,12 +20,11 @@ import requests
 
 # 从API中获取
 def get_motto_from_API():
-    url = "http://api.avatardata.cn/MingRenMingYan/LookUp?key=be8ea9f5676647d79f1639278c6973f8&keyword=我&rows=100"
+    url = "http://api.avatardata.cn/MingRenMingYan/Random?key=be8ea9f5676647d79f1639278c6973f8"
     res = requests.get(url)
-    motto_info_list = json.loads(res.text)['result']
+    motto_info = json.loads(res.text)['result']
 
-    who = random.randint(1,50);
-    return motto_info_list[who]
+    return motto_info
 
 # 从文件中获取(该函数暂时不用)
 def get_motto_from_file():
