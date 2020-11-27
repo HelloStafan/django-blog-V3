@@ -13,7 +13,11 @@
 		<!-- 标语 -->
 		<div class="intro">
 			<h1 class="title">Hello_stefan</h1>
-			<p id="content"> {{ motto.famous_saying }}{{ motto }} </p>
+			{% if motto.famous_saying %}
+				<p id="content"> {{ motto.famous_saying }} </p>
+			{% else %}
+				<p id="content"> {{ motto }} </p>
+			{% endif %}
 			<p id="author" style="text-align: right"> ——  {{ motto.famous_name }}  </p>
 		</div>
 		<!-- 更多 -->

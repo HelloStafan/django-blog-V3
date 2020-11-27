@@ -15,13 +15,15 @@ def dowhat(request):
 	user_before_view = request.META.get('HTTP_REFERER')
 	request.session["user_before_view"] = user_before_view
 
+	# 获取参数
 	dowhat = request.GET.get("dowhat")
+	
 	if dowhat == "loginout":
 		return redirect("/user/loginout")
 	elif dowhat == "register":
 		return render(request, "register.html")
 	else:
-		# 不传参数是登录，即默认是登录 
+		# 默认无参数为登录 
 		return render(request, "login.html")
 		
 
@@ -42,7 +44,6 @@ def register(request):
 		request.session["userid"] = user.id
 		return redirect(request.session["user_before_view"])
 
-		
 
 def login(request):
 	

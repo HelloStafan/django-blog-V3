@@ -3,7 +3,7 @@ import json
 
 
 class RedisUtil(object):
-	"""docstring for RedisUtil"""
+	"""redis数据库工具"""
 	def __init__(self):
 		# 实例化一个连接对象
 		self.client = redis.Redis() 
