@@ -53,8 +53,13 @@ def home(request):
         motto = get_motto_from_API()
     except KeyError:
         motto = get_motto_from_file()
+
+
+    address = request.META.get("REMOTE_ADDR")
+
     redis_util = RedisUtil()
     redis_util.plus()
+    redis_util.add(address)
 
     return render( request,
                   'home.html',
