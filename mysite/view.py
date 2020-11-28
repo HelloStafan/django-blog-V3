@@ -16,6 +16,8 @@ import random
 import json
 import requests
 
+from util.redis_util import RedisUtil 
+
 # 定义一些零散的,全局的 视图  如  主页面
 
 # 从API中获取
@@ -51,7 +53,9 @@ def home(request):
         motto = get_motto_from_API()
     except KeyError:
         motto = get_motto_from_file()
-        
+    redis_util = RedisUtil()
+    redis_util.plus()
+
     return render( request,
                   'home.html',
                   { # 列表信息
@@ -60,7 +64,7 @@ def home(request):
                    })
 
 
-# ★搜索页面
+# 搜索页面
 def search(request):
     # 从表单中 获取对应请求(为get请求)的kw参数
     search_keyword = request.GET.get('kw', '').strip()  

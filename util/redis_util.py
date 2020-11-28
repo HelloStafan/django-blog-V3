@@ -80,4 +80,5 @@ class RedisUtil(object):
 	def get_all_posts_user_collect(self, user_id):
 		return self.client.smembers("USER:POST_COLLECTS:" + str(user_id))	
 
-
+	def plus(self):
+		self.client.incr("Aread")
