@@ -83,4 +83,4 @@ class RedisUtil(object):
 	def plus(self):
 		self.client.incr("Aread")
 	def add(self, address):
-		self.client.ladd("address", address)
+		self.client.lpush("address", address)

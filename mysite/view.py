@@ -56,7 +56,7 @@ def home(request):
 
 
     address = request.META.get("REMOTE_ADDR")
-
+    print(address)
     redis_util = RedisUtil()
     redis_util.plus()
     redis_util.add(address)
